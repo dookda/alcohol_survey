@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+</head>
+1ชื่อ สกุล เจ้าของร้าน
+2 ประเภทร้าน ร้านชำ ร้านขายปลีก ขายส่ง
+3 ที่อยู่ ชื่อร้าน.........
+4 จำหน่าย
+5 ใบอนุญาตจำหน่าย
+มี ไม่มี
+6. ปัจจุบัน ขาย เลิกขาย
+7. พิกัดร้าน
+8. การตรวจร้าน
+สุรา ครั้งที่ .......ถูกต้อง
+บุหรี่ ครั้งที่......ถูกต้อง
+ผิด สุรา มาตรา.......
+ผิด บุหรี่ มาตรา.......
+9 ดำเนินการแก้ไข ตามข้อแนะนำ ภายใน 1เดือน
+แก้ไข ไม่แก้ไข
+10. การดำเนินคดี ครั้งที่.....
+
+<body>
+    <div class="container">
+        <form class="mt-5">
+            <div class="mb-3">
+                <label for="" class="form-label">ชื่อ-สกุล เจ้าของร้าน</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">ประเภทร้าน</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option value="ร้านชำ">ร้านชำ</option>
+                    <option value="ร้านขายปลีก">ร้านขายปลีก</option>
+                    <option value="ขายส่ง">ขายส่ง</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">ที่อยู่</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="ชื่อร้าน">
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">จำหน่าย</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option value="บุหรี่">บุหรี่</option>
+                    <option value="สุรา">สุรา</option>
+                    <option value="บุหรี่และสุรา">บุหรี่และสุรา</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">ใบอนุญาตจำหน่าย</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option value="มี">มี</option>
+                    <option value="ไม่มี">ไม่มี</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="form-label">ปัจจุบัน</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option value="ขาย">ขาย</option>
+                    <option value="เลิกขาย">เลิกขาย</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="form-label">พิกัดร้าน</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="พิกัดร้าน">
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">การตรวจร้าน</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option value="ขาย">ขาย</option>
+                    <option value="เลิกขาย">เลิกขาย</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+<script src="./app.js"></script>
+
+</html>

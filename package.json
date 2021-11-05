@@ -1,0 +1,25 @@
+{
+  "name": "alcohol_survey",
+  "version": "1.0.0",
+  "description": "alcohol survey project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dookda/alcohol_survey.git"
+  },
+  "keywords": [
+    "alcohol"
+  ],
+  "author": "sakda homhuan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dookda/alcohol_survey/issues"
+  },
+  "homepage": "https://github.com/dookda/alcohol_survey#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
