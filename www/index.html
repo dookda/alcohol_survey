@@ -17,6 +17,13 @@
 
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
     <link rel="icon" href="images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.74.1/dist/L.Control.Locate.min.css" />
+
     <link rel="stylesheet" href="./style.css">
 </head>
 
@@ -121,12 +128,12 @@
                     <div class="row">
                         <div class="form-group col-lg-6 col-md-12">
                             <label for="" class="form-label">ชื่อ-สกุล เจ้าของร้าน</label>
-                            <input type="text" name="name" placeholder="Title">
+                            <input type="text" id="owner_name" placeholder="Title">
                         </div>
 
                         <div class="form-group col-lg-6 col-md-12">
                             <label>ประเภทร้าน</label>
-                            <select class="chosen-select" aria-label="Default select example">
+                            <select class="chosen-select" id="retail_type">
                                 <option value="ร้านชำ">ร้านชำ</option>
                                 <option value="ร้านขายปลีก">ร้านขายปลีก</option>
                                 <option value="ขายส่ง">ขายส่ง</option>
@@ -135,7 +142,7 @@
 
                         <div class="form-group col-lg-6 col-md-12">
                             <label for="" class="form-label">จำหน่าย</label>
-                            <select class="chosen-select" aria-label="Default select example">
+                            <select class="chosen-select" id="product_type">
                                 <option value="บุหรี่">บุหรี่</option>
                                 <option value="สุรา">สุรา</option>
                                 <option value="บุหรี่และสุรา">บุหรี่และสุรา</option>
@@ -144,7 +151,7 @@
 
                         <div class="form-group col-lg-6 col-md-12">
                             <label for="" class="form-label">ใบอนุญาตจำหน่าย</label>
-                            <select class="chosen-select" aria-label="Default select example">
+                            <select class="chosen-select" id="certification">
                                 <option value="มี">มี</option>
                                 <option value="ไม่มี">ไม่มี</option>
                             </select>
@@ -152,20 +159,21 @@
 
                         <div class="form-group col-lg-6 col-md-12">
                             <label for="" class="form-label">ที่อยู่</label>
-                            <input type="text" id="exampleInputPassword1" placeholder="ชื่อร้าน">
+                            <input type="text" id="addresses" placeholder="ชื่อร้าน">
                         </div>
 
                         <div class="form-group col-lg-6 col-md-12">
                             <label for="" class="form-label">ปัจจุบัน</label>
-                            <select class="chosen-select" aria-label="Default select example">
+                            <select class="chosen-select" id="retail_status">
                                 <option value="ขาย">ขาย</option>
                                 <option value="เลิกขาย">เลิกขาย</option>
                             </select>
                         </div>
 
-                        <div class="form-group col-lg-6 col-md-12">
+                        <div class="form-group col-lg-12 col-md-12">
                             <label for="" class="form-label">พิกัดร้าน</label>
-                            <input type="text" id="exampleInputPassword1" placeholder="พิกัดร้าน">
+                            <input type="hidden" id="lat">
+                            <input type="hidden" id="lng">
                             <div id="map"></div>
                         </div>
                     </div>
@@ -177,7 +185,7 @@
                             <div class=" form-group">
                                 <label for="" class="form-label">สุรา สำรวจครั้งที่</label>
 
-                                <select class="chosen-select" aria-label="Default select example">
+                                <select class="chosen-select" id="alcohol_survey">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -192,33 +200,28 @@
                             </div>
 
                             <div class="form-group ">
-                                <div class="payment-options">
-                                    <ul>
-                                        <li>
-                                            <div class="radio-option radio-box">
-                                                <input type="radio" name="payment-group" id="payment-2" checked="">
-                                                <label for="payment-2">ถูกต้อง</label>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="radio-option radio-box">
-                                                <input type="radio" name="payment-group" id="payment-1">
-                                                <label for="payment-1"> ผิด </label>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                <div class="radio-outer margin-top-10">
+                                    <div class="radio-box">
+                                        <input type="radio" name="alcohol" id="alcoholyes" value="true" checked=""
+                                            onclick="handleAlcohol(this);">
+                                        <label for="alcoholyes">ถูกต้อง</label>
+                                    </div>
+                                    <div class="radio-box">
+                                        <input type="radio" name="alcohol" id="alcoholno" value="false"
+                                            onclick="handleAlcohol(this);">
+                                        <label for="alcoholno">ผิด</label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <input type="text" id="exampleInputPassword1" placeholder="มาตรา">
+                                <input type="text" id="alcohol_item" placeholder="หากผิด ระบุมาตรา">
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group ">
                                 <label for="" class="form-label">บุหรี่ สำรวจครั้งที่</label>
 
-                                <select class="chosen-select" aria-label="Default select example">
+                                <select class="chosen-select" id="cigarette_survey">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -233,36 +236,37 @@
                             </div>
 
                             <div class="form-group ">
-                                <div class="payment-options">
-                                    <ul>
-                                        <li>
-                                            <div class="radio-option radio-box">
-                                                <input type="radio" name="payment-group" id="payment-2" checked="">
-                                                <label for="payment-2">ถูกต้อง</label>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="radio-option radio-box">
-                                                <input type="radio" name="payment-group" id="payment-1">
-                                                <label for="payment-1"> ผิด </label>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                <div class="radio-outer margin-top-10">
+                                    <div class="radio-box">
+                                        <input type="radio" name="cigarette" id="cigaretteyes" value="true" checked=""
+                                            onclick="handleCigarette(this);">
+                                        <label for="cigaretteyes">ถูกต้อง</label>
+                                    </div>
+                                    <div class="radio-box">
+                                        <input type="radio" name="cigarette" id="cigaretteyno" value="false"
+                                            onclick="handleCigarette(this);">
+                                        <label for="cigaretteyno">ผิด</label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <input type="text" id="exampleInputPassword1" placeholder="มาตรา">
+                                <input type="text" id="cigarette_item" placeholder="หากผิด ระบุมาตรา">
                             </div>
                         </div>
                     </div>
                 </div>
-
-
+                <div class="default-form mt-1">
+                    <label for="img">ถ่ายภาพ</label> <br>
+                    <div class="form-group">
+                        <input type="file" accept="image/*" name="imgfile" id="imgfile">
+                        <p></p>
+                        <img src="" id="preview" width="100%">
+                    </div>
+                </div>
                 <div class="default-form mt-5">
                     <div class="row ">
                         <div class="form-group col-lg-12 col-md-12">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button class="btn btn-primary" onclick="saveData()">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -320,6 +324,13 @@
     <script src="js/owl.js"></script>
     <script src="js/wow.js"></script>
     <script src="js/script.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.74.1/src/L.Control.Locate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="./app.js"></script>
 
 </body>
 
