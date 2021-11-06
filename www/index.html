@@ -2,113 +2,325 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <!-- Responsive -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Superio | Just another HTML Template | Home Page 03</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&display=swap" rel="stylesheet">
     <!-- Stylesheets -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="./style.css">
 </head>
-1ชื่อ สกุล เจ้าของร้าน
-2 ประเภทร้าน ร้านชำ ร้านขายปลีก ขายส่ง
-3 ที่อยู่ ชื่อร้าน.........
-4 จำหน่าย
-5 ใบอนุญาตจำหน่าย
-มี ไม่มี
-6. ปัจจุบัน ขาย เลิกขาย
-7. พิกัดร้าน
-8. การตรวจร้าน
-สุรา ครั้งที่ .......ถูกต้อง
-บุหรี่ ครั้งที่......ถูกต้อง
-ผิด สุรา มาตรา.......
-ผิด บุหรี่ มาตรา.......
-9 ดำเนินการแก้ไข ตามข้อแนะนำ ภายใน 1เดือน
-แก้ไข ไม่แก้ไข
-10. การดำเนินคดี ครั้งที่.....
 
-<body>
-    <div class="container">
-        <form class="mt-5">
-            <div class="mb-3">
-                <label for="" class="form-label">ชื่อ-สกุล เจ้าของร้าน</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-                <label for="" class="form-label">ประเภทร้าน</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option value="ร้านชำ">ร้านชำ</option>
-                    <option value="ร้านขายปลีก">ร้านขายปลีก</option>
-                    <option value="ขายส่ง">ขายส่ง</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="" class="form-label">ที่อยู่</label>
-                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="ชื่อร้าน">
-            </div>
-            <div class="mb-3">
-                <label for="" class="form-label">จำหน่าย</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option value="บุหรี่">บุหรี่</option>
-                    <option value="สุรา">สุรา</option>
-                    <option value="บุหรี่และสุรา">บุหรี่และสุรา</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="" class="form-label">ใบอนุญาตจำหน่าย</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option value="มี">มี</option>
-                    <option value="ไม่มี">ไม่มี</option>
-                </select>
-            </div>
+<body data-anm=".anm">
 
-            <div class="mb-3">
-                <label for="" class="form-label">ปัจจุบัน</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option value="ขาย">ขาย</option>
-                    <option value="เลิกขาย">เลิกขาย</option>
-                </select>
-            </div>
+    <div class="page-wrapper">
 
-            <div class="mb-3">
-                <label for="" class="form-label">พิกัดร้าน</label>
-                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="พิกัดร้าน">
-            </div>
-            <div class="mb-3">
-                <label for="" class="form-label">การตรวจร้าน</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option value="ขาย">ขาย</option>
-                    <option value="เลิกขาย">เลิกขาย</option>
-                </select>
+        <!-- Preloader -->
+        <div class="preloader"></div>
+
+        <!-- Main Header-->
+        <header class="main-header">
+
+            <!-- Main box -->
+            <div class="main-box">
+                <!--Nav Outer -->
+                <div class="nav-outer">
+                    <div class="logo-box">
+                        <div class="logo"><a href="index.html"><img src="images/logo.svg" alt="" title=""></a></div>
+                    </div>
+
+                    <nav class="nav main-menu">
+                        <ul class="navigation" id="navbar">
+                            <li class="current dropdown">
+                                <span>Home</span>
+                                <ul>
+                                    <li><a href="index.html">Home Page 01</a></li>
+                                    <li><a href="index-2.html">Home Page 02</a></li>
+                                    <li class="current"><a href="index-3.html">Home Page 03</a></li>
+                                    <li><a href="index-4.html">Home Page 04</a></li>
+                                    <li><a href="index-5.html">Home Page 05</a></li>
+                                    <li><a href="index-6.html">Home Page 06</a></li>
+                                    <li><a href="index-7.html">Home Page 07</a></li>
+                                    <li><a href="index-8.html">Home Page 08</a></li>
+                                    <li><a href="index-9.html">Home Page 09</a></li>
+                                    <li><a href="index-10.html">Home Page 10</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="current dropdown">
+                                <span>Home</span>
+                                <ul>
+                                    <li><a href="index.html">Home Page 01</a></li>
+                                    <li><a href="index-2.html">Home Page 02</a></li>
+                                    <li class="current"><a href="index-3.html">Home Page 03</a></li>
+                                    <li><a href="index-4.html">Home Page 04</a></li>
+                                    <li><a href="index-5.html">Home Page 05</a></li>
+                                    <li><a href="index-6.html">Home Page 06</a></li>
+                                    <li><a href="index-7.html">Home Page 07</a></li>
+                                    <li><a href="index-8.html">Home Page 08</a></li>
+                                    <li><a href="index-9.html">Home Page 09</a></li>
+                                    <li><a href="index-10.html">Home Page 10</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+
+                    </nav>
+                    <!-- Main Menu End-->
+                </div>
+
+                <div class="outer-box">
+                    <!-- Add Listing -->
+                    <a href="candidate-dashboard-cv-manager.html" class="upload-cv"> Upload your CV</a>
+                    <!-- Login/Register -->
+                    <div class="btn-box">
+                        <a href="login-popup.html" class="theme-btn btn-style-three call-modal">Login / Register</a>
+                        <a href="dashboard-post-job.html" class="theme-btn btn-style-one">Job Post</a>
+                    </div>
+                </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+            <!-- Mobile Header -->
+            <div class="mobile-header">
+                <div class="logo"><a href="index.html"><img src="images/logo.svg" alt="" title=""></a></div>
+
+                <!--Nav Box-->
+                <div class="nav-outer clearfix">
+
+                    <div class="outer-box">
+                        <!-- Login/Register -->
+                        <div class="login-box">
+                            <a href="login-popup.html" class="call-modal"><span class="icon-user"></span></a>
+                        </div>
+
+                        <a href="#nav-mobile" class="mobile-nav-toggler navbar-trigger"><span
+                                class="flaticon-menu-1"></span></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Nav -->
+            <div id="nav-mobile"></div>
+        </header>
+        <!--End Main Header -->
+
+        <!-- About Section -->
+        <section class="about-section-two">
+            <div class="auto-container">
+
+                <div class="default-form">
+                    <div class="row">
+                        <div class="form-group col-lg-6 col-md-12">
+                            <label for="" class="form-label">ชื่อ-สกุล เจ้าของร้าน</label>
+                            <input type="text" name="name" placeholder="Title">
+                        </div>
+
+                        <div class="form-group col-lg-6 col-md-12">
+                            <label>ประเภทร้าน</label>
+                            <select class="chosen-select" aria-label="Default select example">
+                                <option value="ร้านชำ">ร้านชำ</option>
+                                <option value="ร้านขายปลีก">ร้านขายปลีก</option>
+                                <option value="ขายส่ง">ขายส่ง</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-lg-6 col-md-12">
+                            <label for="" class="form-label">จำหน่าย</label>
+                            <select class="chosen-select" aria-label="Default select example">
+                                <option value="บุหรี่">บุหรี่</option>
+                                <option value="สุรา">สุรา</option>
+                                <option value="บุหรี่และสุรา">บุหรี่และสุรา</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-lg-6 col-md-12">
+                            <label for="" class="form-label">ใบอนุญาตจำหน่าย</label>
+                            <select class="chosen-select" aria-label="Default select example">
+                                <option value="มี">มี</option>
+                                <option value="ไม่มี">ไม่มี</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-lg-6 col-md-12">
+                            <label for="" class="form-label">ที่อยู่</label>
+                            <input type="text" id="exampleInputPassword1" placeholder="ชื่อร้าน">
+                        </div>
+
+                        <div class="form-group col-lg-6 col-md-12">
+                            <label for="" class="form-label">ปัจจุบัน</label>
+                            <select class="chosen-select" aria-label="Default select example">
+                                <option value="ขาย">ขาย</option>
+                                <option value="เลิกขาย">เลิกขาย</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-lg-6 col-md-12">
+                            <label for="" class="form-label">พิกัดร้าน</label>
+                            <input type="text" id="exampleInputPassword1" placeholder="พิกัดร้าน">
+                            <div id="map"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="default-form mt-5">
+                    <div class="row ">
+                        <div class="col-lg-6 col-md-12">
+                            <div class=" form-group">
+                                <label for="" class="form-label">สุรา สำรวจครั้งที่</label>
+
+                                <select class="chosen-select" aria-label="Default select example">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group ">
+                                <div class="payment-options">
+                                    <ul>
+                                        <li>
+                                            <div class="radio-option radio-box">
+                                                <input type="radio" name="payment-group" id="payment-2" checked="">
+                                                <label for="payment-2">ถูกต้อง</label>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="radio-option radio-box">
+                                                <input type="radio" name="payment-group" id="payment-1">
+                                                <label for="payment-1"> ผิด </label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <input type="text" id="exampleInputPassword1" placeholder="มาตรา">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group ">
+                                <label for="" class="form-label">บุหรี่ สำรวจครั้งที่</label>
+
+                                <select class="chosen-select" aria-label="Default select example">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group ">
+                                <div class="payment-options">
+                                    <ul>
+                                        <li>
+                                            <div class="radio-option radio-box">
+                                                <input type="radio" name="payment-group" id="payment-2" checked="">
+                                                <label for="payment-2">ถูกต้อง</label>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="radio-option radio-box">
+                                                <input type="radio" name="payment-group" id="payment-1">
+                                                <label for="payment-1"> ผิด </label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <input type="text" id="exampleInputPassword1" placeholder="มาตรา">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="default-form mt-5">
+                    <div class="row ">
+                        <div class="form-group col-lg-12 col-md-12">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
     </div>
+    </section>
+    <!-- End About Section -->
+
+
+
+    <!-- Main Footer -->
+    <footer class="main-footer alternate">
+
+
+        <!--Bottom-->
+        <div class="footer-bottom">
+            <div class="auto-container">
+                <div class="outer-box">
+                    <div class="copyright-text">© 2021 <a href="#">Superio</a>. All Right Reserved.</div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll To Top -->
+        <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-up"></span></div>
+    </footer>
+    <!-- End Main Footer -->
+
+
+    </div><!-- End Page Wrapper -->
+
+
+    <script src="js/jquery.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/chosen.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.fancybox.js"></script>
+    <script src="js/jquery.modal.min.js"></script>
+    <script src="js/mmenu.polyfills.js"></script>
+    <script src="js/mmenu.js"></script>
+    <script src="js/appear.js"></script>
+    <script src="js/anm.min.js"></script>
+    <script src="js/owl.js"></script>
+    <script src="js/wow.js"></script>
+    <script src="js/script.js"></script>
 
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
-
-<script src="js/jquery.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/chosen.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/jquery.fancybox.js"></script>
-<script src="js/jquery.modal.min.js"></script>
-<script src="js/mmenu.polyfills.js"></script>
-<script src="js/mmenu.js"></script>
-<script src="js/appear.js"></script>
-<script src="js/owl.js"></script>
-<script src="js/wow.js"></script>
-<script src="js/script.js"></script>
-
-<script src="./app.js"></script>
 
 </html>

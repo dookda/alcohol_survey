@@ -1,0 +1,8 @@
+body{
+    font-family: 'IBM Plex Sans Thai', sans-serif;
+}
+
+#map{
+    width: 100%;
+    height: 360px;
+}
