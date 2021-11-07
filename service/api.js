@@ -26,7 +26,7 @@ app.post("/alcohol-api/getdata", (req, res) => {
             certification, addresses, retail_status, alcohol_survey, alcohol, 
             alcohol_item, cigarette_survey, cigarette, cigarette_item,lat,lng,
             TO_CHAR(ts, 'DD-MM-YYYY') as ndate, img, ST_AsGeojson(geom) as geojson  
-        FROM ud_alcohol`;
+        FROM ud_alcohol ORDER BY ts DESC`;
 
     db.query(sql).then(r => {
         res.status(200).json({
@@ -35,13 +35,13 @@ app.post("/alcohol-api/getdata", (req, res) => {
     })
 })
 
-app.post("/alcohol-api/getownerdata", (req, res) => {
-    const { usrid } = req.body;
-    const sql = `SELECT gid, proj_id, bioname, biodetail, bioplace, biotype,
-            pro, amp, tam, pro_name, amp_name, tam_name, lat, lon,
-            TO_CHAR(ndate, 'DD-MM-YYYY') as ndate, usrname, img,   
-            ST_AsGeojson(geom) as geojson  
-        FROM ud_alcohol WHERE usrid='${usrid}' ORDER BY ndate ASC`;
+app.post("/alcohol-api/getselectdata", (req, res) => {
+    const { pid } = req.body;
+    const sql = `SELECT gid, pid, owner_name, retail_type, product_type, 
+        certification, addresses, retail_status, alcohol_survey, alcohol, 
+        alcohol_item, cigarette_survey, cigarette, cigarette_item,lat,lng,
+        TO_CHAR(ts, 'DD-MM-YYYY') as ndate, img, ST_AsGeojson(geom) as geojson  
+    FROM ud_alcohol WHERE pid='${pid}' ORDER BY ts DESC`;
 
     db.query(sql).then(r => {
         res.status(200).json({
@@ -63,8 +63,6 @@ app.post("/alcohol-api/insert", async (req, res) => {
         }
     }
 
-    // console.log(data);
-
     if (data.geom !== "") {
         let sql = `UPDATE ud_alcohol SET geom = ST_GeomfromGeoJSON('${JSON.stringify(data.geom.geometry)}') 
             WHERE pid='${pid}'`;
@@ -76,18 +74,18 @@ app.post("/alcohol-api/insert", async (req, res) => {
 })
 
 app.post("/alcohol-api/update", async (req, res) => {
-    const { proj_id, data } = req.body;
+    const { pid, data } = req.body;
     let d;
     for (d in data) {
         if (data[d] !== '' && d !== 'geom') {
-            let sql = `UPDATE ud_alcohol SET ${d}='${data[d]}', ndate=now() WHERE proj_id='${proj_id}'`;
+            let sql = `UPDATE ud_alcohol SET ${d}='${data[d]}', ts=now() WHERE pid='${pid}'`;
             await db.query(sql)
         }
     }
 
     if (data.geom !== "" && data.geom.geometry) {
         let sql = `UPDATE ud_alcohol SET geom = ST_GeomfromGeoJSON('${JSON.stringify(data.geom.geometry)}') 
-            WHERE proj_id='${proj_id}'`;
+            WHERE pid='${pid}'`;
         await db.query(sql)
     }
     res.status(200).json({
@@ -96,12 +94,42 @@ app.post("/alcohol-api/update", async (req, res) => {
 })
 
 app.post("/alcohol-api/delete", (req, res) => {
-    const { proj_id } = req.body;
-    const sql = `DELETE FROM ud_alcohol WHERE proj_id='${proj_id}'`
+    const { pid } = req.body;
+    const sql = `DELETE FROM ud_alcohol WHERE pid='${pid}'`
     // console.log(sql);
     db.query(sql).then(r => {
         res.status(200).json({
             data: "success"
+        })
+    })
+})
+
+app.post("/alcohol-api/getuser", (req, res) => {
+    const { usrid } = req.body;
+    const sql = `SELECT * FROM usertb WHERE usrid='${usrid}'`;
+    db.query(sql).then(r => {
+        res.status(200).json({
+            data: r.rows
+        })
+    })
+})
+
+app.post("/alcohol-api/insertuser", (req, res) => {
+    const { usrid, username, agency, linename } = req.body;
+    const sql = `INSERT INTO usertb(usrid, username, agency, linename)VALUES('${usrid}', '${username}', '${agency}', '${linename}') `;
+    db.query(sql).then(r => {
+        res.status(200).json({
+            data: r.rows
+        })
+    })
+})
+
+app.post("/alcohol-api/updateuser", (req, res) => {
+    const { usrid, username, agency } = req.body;
+    const sql = `UPDATE usertb SET username='{username}', agency='{agency}'  WHERE usrid='${usrid}'`;
+    db.query(sql).then(r => {
+        res.status(200).json({
+            data: r.rows
         })
     })
 })

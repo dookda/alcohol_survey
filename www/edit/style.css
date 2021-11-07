@@ -1,5 +1,5 @@
 body{
-    font-family: 'Kanit', sans-serif;
+    font-family: 'IBM Plex Sans Thai', sans-serif;
 }
 
 #map{
@@ -7,14 +7,6 @@ body{
     height: 360px;
     border-radius: 5px;
     z-index: 1;
-}
-
-.cursor{
-    cursor: pointer;
-}
-
-.f-16{
-    font-size: 18px;
 }
 
 .inner-column{

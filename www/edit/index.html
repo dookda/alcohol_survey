@@ -128,7 +128,7 @@
 
                             <div class="form-group col-lg-6 col-md-12">
                                 <label for="" class="form-label">ที่อยู่</label>
-                                <input type="text" id="addresses" placeholder="ระบุที่อยู่">
+                                <input type="text" id="addresses">
                             </div>
 
                             <div class="form-group col-lg-6 col-md-12">
@@ -171,19 +171,17 @@
                                 <div class="form-group ">
                                     <div class="radio-outer margin-top-10">
                                         <div class="radio-box">
-                                            <input type="radio" name="alcohol" id="alcoholyes" value="true" checked=""
-                                                onclick="handleAlcohol(this);">
+                                            <input type="radio" name="alcohol" id="alcoholyes" value="true">
                                             <label for="alcoholyes">ถูกต้อง</label>
                                         </div>
                                         <div class="radio-box">
-                                            <input type="radio" name="alcohol" id="alcoholno" value="false"
-                                                onclick="handleAlcohol(this);">
+                                            <input type="radio" name="alcohol" id="alcoholno" value="false">
                                             <label for="alcoholno">ผิด</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    <input type="text" id="alcohol_item" placeholder="หากผิด ระบุมาตรา">
+                                    <input type="text" id="alcohol_item" placeholder="">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-12">
@@ -207,19 +205,17 @@
                                 <div class="form-group ">
                                     <div class="radio-outer margin-top-10">
                                         <div class="radio-box">
-                                            <input type="radio" name="cigarette" id="cigaretteyes" value="true"
-                                                checked="" onclick="handleCigarette(this);">
+                                            <input type="radio" name="cigarette" id="cigaretteyes" value="true">
                                             <label for="cigaretteyes">ถูกต้อง</label>
                                         </div>
                                         <div class="radio-box">
-                                            <input type="radio" name="cigarette" id="cigaretteyno" value="false"
-                                                onclick="handleCigarette(this);">
+                                            <input type="radio" name="cigarette" id="cigaretteyno" value="false">
                                             <label for="cigaretteyno">ผิด</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    <input type="text" id="cigarette_item" placeholder="หากผิด ระบุมาตรา">
+                                    <input type="text" id="cigarette_item" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -228,6 +224,7 @@
                         <label for="img">ถ่ายภาพ</label> <br>
                         <div class="form-group">
                             <input type="file" accept="image/*" name="imgfile" id="imgfile">
+
                             <div class="mt-3">
                                 <img src="" id="preview" width="100%">
                             </div>
@@ -242,10 +239,14 @@
                         </div>
                     </div>
 
+
                 </div>
+
             </div>
+
         </section>
     </div>
+
     <!-- End About Section -->
 
 
