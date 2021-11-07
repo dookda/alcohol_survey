@@ -21,10 +21,11 @@ app.post("/alcohol-api/getdataone", (req, res) => {
 
 app.post("/alcohol-api/getdata", (req, res) => {
     const { usrid } = req.body;
-    const sql = `SELECT gid, proj_id, bioname, biodetail, bioplace, biotype,
-            pro, amp, tam, pro_name, amp_name, tam_name, lat, lon,
-            TO_CHAR(ndate, 'DD-MM-YYYY') as ndate, usrname, img,   
-            ST_AsGeojson(geom) as geojson  
+
+    const sql = `SELECT gid, pid, owner_name, retail_type, product_type, 
+            certification, addresses, retail_status, alcohol_survey, alcohol, 
+            alcohol_item, cigarette_survey, cigarette, cigarette_item,lat,lng,
+            TO_CHAR(ts, 'DD-MM-YYYY') as ndate, img, ST_AsGeojson(geom) as geojson  
         FROM ud_alcohol`;
 
     db.query(sql).then(r => {
