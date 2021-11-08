@@ -30,9 +30,9 @@ app.use(api);
 app.use('/', express.static('www'))
 
 var server = https.createServer(https_options, app);
-var port = process.env.PORT || 3150;
+var port = process.env.PORT || 4000;
 server.listen(port, function () {
-    console.log('Hello IREALLYHOST listening on port ' + server.address().port);
+    console.log('listening on port ' + server.address().port);
 });
 
 //app.listen(3100, () => {

@@ -1,21 +1,35 @@
-// var userId;
-// async function getUserid() {
-//     const profile = await liff.getProfile();
-//     console.log(profile)
-//     userId = await profile.userId;
+function initializeLiff() {
+    liff.init({
+        liffId: "1656610153-LedkyobK"
+    }).then((e) => {
+        if (!liff.isLoggedIn()) {
+            liff.login();
+        } else {
+            getUserid();
+        }
+    }).catch((err) => {
+        console.log(err);
+    });
+}
 
-//     $('#profile').attr('src', await profile.pictureUrl);
-//     // $('#userId').text(profile.userId);
-//     $('#statusMessage').text(await profile.statusMessage);
-//     $('#displayName').text(await profile.displayName);
-// }
+async function getUserid() {
+    const profile = await liff.getProfile();
+    document.getElementById("usrid").value = await profile.userId;
+    document.getElementById("profile1").src = await profile.pictureUrl;
+    document.getElementById("displayName1").innerHTML = await profile.displayName;
+    document.getElementById("profile2").src = await profile.pictureUrl;
+    document.getElementById("displayName2").innerHTML = await profile.displayName;
+}
 
-var url = 'https://rti2dss.com:3150';
+initializeLiff()
+
+var url = 'https://rti2dss.com:4000';
 // var url = 'http://localhost:3000'
 
 let map = L.map('map', {
     center: [16.820378, 100.265787],
-    zoom: 13
+    zoom: 13,
+    scrollWheelZoom: false
 });
 
 var marker = "";
@@ -146,6 +160,7 @@ let saveData = () => {
 
     const obj = {
         data: {
+            usrid: document.getElementById('usrid').value,
             owner_name: document.getElementById('owner_name').value,
             retail_type: document.getElementById('retail_type').value,
             product_type: document.getElementById('product_type').value,
@@ -174,5 +189,6 @@ let saveData = () => {
 let editData = () => {
     location.href = "./../report/index.html";
 }
+
 
 

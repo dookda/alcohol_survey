@@ -1,18 +1,29 @@
-// var userId;
-// async function getUserid() {
-//     const profile = await liff.getProfile();
-//     console.log(profile)
-//     userId = await profile.userId;
+function initializeLiff() {
+    liff.init({
+        liffId: "1656610153-LnnDqMG5"
+    }).then((e) => {
+        if (!liff.isLoggedIn()) {
+            liff.login();
+        } else {
+            getUserid();
+        }
+    }).catch((err) => {
+        console.log(err);
+    });
+}
 
-//     $('#profile').attr('src', await profile.pictureUrl);
-//     // $('#userId').text(profile.userId);
-//     $('#statusMessage').text(await profile.statusMessage);
-//     $('#displayName').text(await profile.displayName);
-// }
+async function getUserid() {
+    const profile = await liff.getProfile();
+    document.getElementById("usrid").value = await profile.userId;
+    document.getElementById("profile1").src = await profile.pictureUrl;
+    document.getElementById("displayName1").innerHTML = await profile.displayName;
+    document.getElementById("profile2").src = await profile.pictureUrl;
+    document.getElementById("displayName2").innerHTML = await profile.displayName;
+}
 
-var url = 'https://rti2dss.com:3150';
+initializeLiff()
 
-
+var url = 'https://rti2dss.com:4000';
 // var url = 'http://localhost:3000'
 
 let loadData = () => {

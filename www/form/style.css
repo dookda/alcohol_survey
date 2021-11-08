@@ -9,6 +9,18 @@ body{
     z-index: 1;
 }
 
+.f-14{
+    font-size: 12px !important;
+}
+
+a{
+    color: #000 !important;
+}
+
 .inner-column{
     padding: 120px 0 60px !important; 
+}
+
+.main-menu .navigation > li.current > a, .main-menu .navigation > li.current > span{
+    color: #000 !important;
 }

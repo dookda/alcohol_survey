@@ -1,25 +1,37 @@
+function initializeLiff() {
+    liff.init({
+        liffId: "1656610153-MvmNVPbx"
+    }).then((e) => {
+        if (!liff.isLoggedIn()) {
+            liff.login();
+        } else {
+            getUserid();
+        }
+    }).catch((err) => {
+        console.log(err);
+    });
+}
 
+async function getUserid() {
+    const profile = await liff.getProfile();
+    document.getElementById("usrid").value = await profile.userId;
+    document.getElementById("profile1").src = await profile.pictureUrl;
+    document.getElementById("displayName1").innerHTML = await profile.displayName;
+    document.getElementById("profile2").src = await profile.pictureUrl;
+    document.getElementById("displayName2").innerHTML = await profile.displayName;
+}
 
-// var userId;
-// async function getUserid() {
-//     const profile = await liff.getProfile();
-//     console.log(profile)
-//     userId = await profile.userId;
+initializeLiff()
 
-//     $('#profile').attr('src', await profile.pictureUrl);
-//     // $('#userId').text(profile.userId);
-//     $('#statusMessage').text(await profile.statusMessage);
-//     $('#displayName').text(await profile.displayName);
-// }
-
-var url = 'https://rti2dss.com:3150';
+var url = 'https://rti2dss.com:4000';
 // var url = 'http://localhost:3000';
 
 let pid = sessionStorage.getItem("pid");
 
 let map = L.map('map', {
     center: [16.820378, 100.265787],
-    zoom: 13
+    zoom: 13,
+    scrollWheelZoom: false
 });
 
 var marker = "";
@@ -82,8 +94,6 @@ map.on('click', (e) => {
 
 let getData = (pid) => {
     axios.post(url + "/alcohol-api/getselectdata", { pid }).then(r => {
-        // console.log(r.data.data[0]);
-
         r.data.data[0].alcohol == "true" ? document.getElementById("alcoholyes").checked = true : document.getElementById("alcoholno").checked = true;
         r.data.data[0].cigarette == "true" ? document.getElementById("cigaretteyes").checked = true : document.getElementById("cigaretteyno").checked = true;
 

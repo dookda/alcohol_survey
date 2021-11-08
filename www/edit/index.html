@@ -56,10 +56,10 @@
                 </div>
 
                 <div class="outer-box">
-                    <a href="candidate-dashboard-cv-manager.html" class="upload-cv"> Upload your CV</a>
+
                     <div class="btn-box">
-                        <a href="login-popup.html" class="theme-btn btn-style-three call-modal">Login / Register</a>
-                        <a href="dashboard-post-job.html" class="theme-btn btn-style-one">Job Post</a>
+                        <a href="login-popup.html" class="call-modal"><span id="displayName1"></span>&nbsp;<img
+                                id="profile1" width="40px"></a>
                     </div>
                 </div>
             </div>
@@ -73,9 +73,9 @@
                 <div class="nav-outer clearfix">
 
                     <div class="outer-box">
-                        <!-- Login/Register -->
                         <div class="login-box">
-                            <a href="login-popup.html" class="call-modal"><span class="icon-user"></span></a>
+                            <a href="login-popup.html" class="call-modal f-14"><span class="f-14"
+                                    id="displayName2"></span>&nbsp;<img id="profile2" width="30px"></a>
                         </div>
 
                         <a href="#nav-mobile" class="mobile-nav-toggler navbar-trigger"><span
@@ -96,6 +96,7 @@
                     <div class="default-form">
                         <div class="row">
                             <div class="form-group col-lg-6 col-md-12">
+                                <input type="hidden" id="usrid">
                                 <label for="" class="form-label">ชื่อ-สกุล เจ้าของร้าน</label>
                                 <input type="text" id="owner_name" placeholder="ระบุชื่อ">
                             </div>
@@ -298,6 +299,7 @@
     <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.74.1/src/L.Control.Locate.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script src="./app.js"></script>
 
 </body>

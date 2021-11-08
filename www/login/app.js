@@ -12,7 +12,7 @@ function initializeLiff() {
     });
 }
 
-var url = 'https://rti2dss.com:3150';
+var url = 'https://rti2dss.com:4000';
 // var url = 'http://localhost:3000'
 
 
@@ -21,19 +21,20 @@ let getData = (usrid) => {
     axios.post(url + "/alcohol-api/getuser", { usrid }).then((r) => {
         console.log(r);
         if (r.data.data.length > 0) {
-            document.getElementById("displayName").value = r.data.data[0].username
-            document.getElementById("agency").value = r.data.data[0].username
-            document.getElementById("insertuser").style.visibility = "hidden";
-            document.getElementById("updateuser").style.visibility = "visible";
+            document.getElementById("username").value = r.data.data[0].username;
+            document.getElementById("agency").value = r.data.data[0].agency;
+            document.getElementById("btn").innerHTML = `<button class="btn btn-success" id="updateuser" onclick="updateUser()"><i
+            class="bi bi-save"></i> บันทึก</button>`
         } else {
-            document.getElementById("insertuser").style.visibility = "visible";
-            document.getElementById("updateuser").style.visibility = "hidden";
+            document.getElementById("btn").innerHTML = `<button class="btn btn-primary" id="insertuser" onclick="insertUser()"><i
+            class="bi bi-save"></i> บันทึก</button>`
         }
     })
 }
 
-let insertUser = (usrid) => {
-    let username = document.getElementById("displayName").value;
+let insertUser = () => {
+    let usrid = document.getElementById("usrid").value;
+    let username = document.getElementById("username").value;
     let agency = document.getElementById("agency").value;
     let linename = document.getElementById("displayName").value;
     axios.post(url + "/alcohol-api/insertuser", { usrid, username, agency, linename }).then((r) => {
@@ -41,8 +42,9 @@ let insertUser = (usrid) => {
     })
 }
 
-let updateUser = (usrid) => {
-    let username = document.getElementById("displayName").value;
+let updateUser = () => {
+    let usrid = document.getElementById("usrid").value;
+    let username = document.getElementById("username").value;
     let agency = document.getElementById("agency").value;
     axios.post(url + "/alcohol-api/updateuser", { usrid, username, agency }).then((r) => {
         getData(usrid)
@@ -52,7 +54,7 @@ let updateUser = (usrid) => {
 async function getUserid() {
     const profile = await liff.getProfile();
     // console.log(profile);
-    // document.getElementById("userid").value = await profile.userId;
+    document.getElementById("usrid").value = await profile.userId;
     document.getElementById("profile").src = await profile.pictureUrl;
     document.getElementById("displayName").value = await profile.displayName;
     // document.getElementById("displayName").innerHTML = await profile.displayName;

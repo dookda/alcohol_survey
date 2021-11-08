@@ -126,7 +126,7 @@ app.post("/alcohol-api/insertuser", (req, res) => {
 
 app.post("/alcohol-api/updateuser", (req, res) => {
     const { usrid, username, agency } = req.body;
-    const sql = `UPDATE usertb SET username='{username}', agency='{agency}'  WHERE usrid='${usrid}'`;
+    const sql = `UPDATE usertb SET username='${username}', agency='${agency}'  WHERE usrid='${usrid}'`;
     db.query(sql).then(r => {
         res.status(200).json({
             data: r.rows
