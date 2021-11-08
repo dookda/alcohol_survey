@@ -61,8 +61,7 @@ let deleteData = (pid) => {
 }
 
 let editData = (pid) => {
-    sessionStorage.setItem("pid", pid);
-    location.href = "./../edit/index.html";
+    location.href = "./../edit/index.html?pid=" + pid;
 }
 
 loadData()

@@ -186,9 +186,6 @@ let saveData = () => {
     })
 };
 
-let editData = () => {
-    location.href = "./../report/index.html";
-}
 
 
 

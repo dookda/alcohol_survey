@@ -21,12 +21,12 @@ async function getUserid() {
     document.getElementById("displayName2").innerHTML = await profile.displayName;
 }
 
-initializeLiff()
+// initializeLiff()
 
 var url = 'https://rti2dss.com:4000';
 // var url = 'http://localhost:3000';
 
-let pid = sessionStorage.getItem("pid");
+var pid = location.search.split('pid=')[1];
 
 let map = L.map('map', {
     center: [16.820378, 100.265787],
