@@ -187,5 +187,13 @@ let saveData = () => {
 };
 
 
+let editData = () => {
 
+    if (liff.getOS() == "web") {
+        location.href = "./../report/index.html";
+    } else {
+        liff.closeWindow()
+    }
+
+}
 

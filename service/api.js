@@ -104,6 +104,16 @@ app.post("/alcohol-api/delete", (req, res) => {
     })
 })
 
+app.post("/alcohol-api/getalluser", (req, res) => {
+    const { usrid } = req.body;
+    const sql = `SELECT * FROM usertb ORDER BY username ASC`;
+    db.query(sql).then(r => {
+        res.status(200).json({
+            data: r.rows
+        })
+    })
+})
+
 app.post("/alcohol-api/getuser", (req, res) => {
     const { usrid } = req.body;
     const sql = `SELECT * FROM usertb WHERE usrid='${usrid}'`;
@@ -127,6 +137,26 @@ app.post("/alcohol-api/insertuser", (req, res) => {
 app.post("/alcohol-api/updateuser", (req, res) => {
     const { usrid, username, agency } = req.body;
     const sql = `UPDATE usertb SET username='${username}', agency='${agency}'  WHERE usrid='${usrid}'`;
+    db.query(sql).then(r => {
+        res.status(200).json({
+            data: r.rows
+        })
+    })
+})
+
+app.post("/alcohol-api/deleteuser", (req, res) => {
+    const { usrid } = req.body;
+    const sql = `DELETE FROM usertb WHERE usrid='${usrid}'`;
+    db.query(sql).then(r => {
+        res.status(200).json({
+            data: r.rows
+        })
+    })
+})
+
+app.post("/alcohol-api/updateauth", (req, res) => {
+    const { usrid, usertype } = req.body;
+    const sql = `UPDATE usertb SET usertype='${usertype}' WHERE usrid='${usrid}'`;
     db.query(sql).then(r => {
         res.status(200).json({
             data: r.rows

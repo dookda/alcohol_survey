@@ -1,5 +1,5 @@
 {
-  "name": "alcohol4000",
+  "name": "server",
   "version": "1.0.0",
   "description": "alcohol survey project",
   "main": "server.js",
