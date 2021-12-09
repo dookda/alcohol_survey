@@ -161,6 +161,7 @@ let saveData = () => {
     const obj = {
         data: {
             usrid: document.getElementById('usrid').value,
+            retail_name: document.getElementById('retail_name').value,
             owner_name: document.getElementById('owner_name').value,
             retail_type: document.getElementById('retail_type').value,
             product_type: document.getElementById('product_type').value,

@@ -22,12 +22,12 @@ app.post("/alcohol-api/getdataone", (req, res) => {
 app.post("/alcohol-api/getdata", (req, res) => {
     const { usrid } = req.body;
 
-    const sql = `SELECT gid, pid, owner_name, retail_type, product_type, 
+    const sql = `SELECT gid, pid, retail_name, owner_name, retail_type, product_type, 
             certification, addresses, retail_status, alcohol_survey, alcohol, 
             alcohol_item, cigarette_survey, cigarette, cigarette_item,lat,lng,
             TO_CHAR(ts, 'DD-MM-YYYY') as ndate, img, ST_AsGeojson(geom) as geojson  
         FROM ud_alcohol ORDER BY ts DESC`;
-
+    // console.log(sql);
     db.query(sql).then(r => {
         res.status(200).json({
             data: r.rows
@@ -36,12 +36,12 @@ app.post("/alcohol-api/getdata", (req, res) => {
 })
 
 app.post("/alcohol-api/getselectdata", (req, res) => {
-    const { pid } = req.body;
-    const sql = `SELECT gid, pid, owner_name, retail_type, product_type, 
+    const { gid } = req.body;
+    const sql = `SELECT gid, pid, retail_name, owner_name, retail_type, product_type, 
         certification, addresses, retail_status, alcohol_survey, alcohol, 
         alcohol_item, cigarette_survey, cigarette, cigarette_item,lat,lng,
         TO_CHAR(ts, 'DD-MM-YYYY') as ndate, img, ST_AsGeojson(geom) as geojson  
-    FROM ud_alcohol WHERE pid='${pid}' ORDER BY ts DESC`;
+    FROM ud_alcohol WHERE gid='${gid}' ORDER BY ts DESC`;
 
     db.query(sql).then(r => {
         res.status(200).json({
@@ -94,8 +94,8 @@ app.post("/alcohol-api/update", async (req, res) => {
 })
 
 app.post("/alcohol-api/delete", (req, res) => {
-    const { pid } = req.body;
-    const sql = `DELETE FROM ud_alcohol WHERE pid='${pid}'`
+    const { gid } = req.body;
+    const sql = `DELETE FROM ud_alcohol WHERE gid='${gid}'`
     // console.log(sql);
     db.query(sql).then(r => {
         res.status(200).json({

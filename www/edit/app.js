@@ -23,10 +23,10 @@ async function getUserid() {
 
 // initializeLiff()
 
-var url = 'https://rti2dss.com:4000';
-// var url = 'http://localhost:3000';
+// var url = 'https://rti2dss.com:4000';
+var url = 'http://localhost:4000';
 
-var pid = location.search.split('pid=')[1];
+var gid = location.search.split('gid=')[1];
 
 let map = L.map('map', {
     center: [16.820378, 100.265787],
@@ -92,11 +92,14 @@ map.on('click', (e) => {
     document.getElementById('lng').value = e.latlng.lng
 });
 
-let getData = (pid) => {
-    axios.post(url + "/alcohol-api/getselectdata", { pid }).then(r => {
+let getData = (gid) => {
+    axios.post(url + "/alcohol-api/getselectdata", { gid }).then(r => {
         r.data.data[0].alcohol == "true" ? document.getElementById("alcoholyes").checked = true : document.getElementById("alcoholno").checked = true;
         r.data.data[0].cigarette == "true" ? document.getElementById("cigaretteyes").checked = true : document.getElementById("cigaretteyno").checked = true;
 
+        console.log(r);
+
+        document.getElementById('retail_name').value = r.data.data[0].retail_name
         document.getElementById('owner_name').value = r.data.data[0].owner_name
         document.getElementById('retail_type').value = r.data.data[0].retail_type
         document.getElementById('product_type').value = r.data.data[0].product_type
@@ -110,13 +113,18 @@ let getData = (pid) => {
         //  document.querySelector('input[name="cigarette"]:checked').value,
         document.getElementById('cigarette_item').value = r.data.data[0].cigarette_item
         document.getElementById('preview').src = r.data.data[0].img
-        sessionStorage.removeItem("pid");
-        // console.log(r.data.data);
-        geom = L.marker([r.data.data[0].lat, r.data.data[0].lng], {
-            draggable: false,
-            name: 'p'
-        }).addTo(map);
-        map.setView([r.data.data[0].lat, r.data.data[0].lng], 14)
+        sessionStorage.removeItem("gid");
+        // console.log(r.data.data[0].geojson);
+        if (r.data.data[0].geojson) {
+            let json = JSON.parse(r.data.data[0].geojson).coordinates
+            // console.log(json[1], json[0]);
+            geom = L.marker([json[1], json[0]], {
+                draggable: false,
+                name: 'p'
+            }).addTo(map);
+            map.setView([json[1], json[0]], 14)
+        }
+
     })
 }
 
@@ -168,9 +176,10 @@ let saveData = () => {
     }
 
     const obj = {
-        pid: pid,
+        gid: gid,
         data: {
-            pid: pid,
+            gid: gid,
+            retail_name: document.getElementById('retail_name').value,
             owner_name: document.getElementById('owner_name').value,
             retail_type: document.getElementById('retail_type').value,
             product_type: document.getElementById('product_type').value,
@@ -199,6 +208,6 @@ let gotoReport = () => {
     location.href = "./../report/index.html";
 }
 
-getData(pid)
+getData(gid)
 
 
