@@ -25,6 +25,51 @@ async function getUserid() {
 
 // var url = 'https://rti2dss.com:4000';
 var url = 'http://localhost:4000'
+
+
+let map = L.map('map', {
+    center: [17.720, 100.050],
+    zoom: 10,
+    scrollWheelZoom: false
+});
+
+var marker = "";
+let geom = "";
+let dataurl = "";
+
+var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+});
+
+const grod = L.tileLayer('https://{s}.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+});
+
+const ghyb = L.tileLayer('https://{s}.google.com/vt/lyrs=y,m&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+});
+
+var prov = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
+    layers: 'th:province_4326',
+    format: 'image/png',
+    transparent: true
+});
+
+var baseMap = {
+    "OSM": osm,
+    "แผนที่ถนน": grod.addTo(map),
+    "แผนที่ภาพถ่าย": ghyb
+}
+
+var overlayMap = {
+    "ขอบจังหวัด": prov
+}
+
+L.control.layers(baseMap, overlayMap).addTo(map);
+
 let xdata = axios.post(url + '/alcohol-api/getdata', { usrid: 'usrid' })
 let datArr = []
 let loadData = () => {
@@ -35,7 +80,20 @@ let loadData = () => {
     })
 }
 
+let removeLayer = () => {
+    map.eachLayer(i => {
+        i.options.name == "p" ? map.removeLayer(i) : null;
+    })
+}
+
+let showMap = (geojson) => {
+    console.log(geojson);
+
+}
+
 let showData = async (objArr) => {
+    removeLayer();
+
     let alcohol = 0;
     let cigarat = 0;
     let alcohol_cigarat = 0;
@@ -58,6 +116,28 @@ let showData = async (objArr) => {
         if (x.product_type == "บุหรี่และสุรา" || x.product_type == "เหล้าและบุหรี่") {
             img = "no-alcohol.png";
             alcohol_cigarat += 1
+        }
+
+        // console.log(x.geojson);
+        if (x.geojson) {
+            let json = JSON.parse(x.geojson).coordinates;
+            let marker = L.marker([json[1], json[0]], {
+                draggable: false,
+                name: 'p'
+            })
+
+            marker.bindPopup(`<div class="row">
+                    <div class="col-4">
+                        <img src="./../images/${img}" alt="" width="50px">
+                    </div>
+                    <div class="col-8 f-popup">
+                        <b>ชื่อร้าน:</b> ${x.retail_name}
+                        <br><b>เจ้าของ:</b> ${x.owner_name}
+                        <br><b>ประเภทที่จำหน่าย:</b> ${x.product_type}
+                    </div>
+                </div>`,
+                { maxWidth: 400 }).openPopup().addTo(map);
+            // map.setView([json[1], json[0]], 14)
         }
 
         document.getElementById("content").innerHTML += `<div class="inner-box mt-2" >
