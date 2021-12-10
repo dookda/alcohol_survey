@@ -22,7 +22,8 @@ app.post("/alcohol-api/getdataone", (req, res) => {
 app.post("/alcohol-api/getdata", (req, res) => {
     const { usrid } = req.body;
 
-    const sql = `SELECT gid, pid, retail_name, owner_name, retail_type, product_type, 
+    const sql = `SELECT gid, pid, CONCAT(retail_name, owner_name, addresses, retail_type, product_type) as txt,
+            retail_name, owner_name, retail_type, product_type, 
             certification, addresses, retail_status, alcohol_survey, alcohol, 
             alcohol_item, cigarette_survey, cigarette, cigarette_item,lat,lng,
             TO_CHAR(ts, 'DD-MM-YYYY') as ndate, img, ST_AsGeojson(geom) as geojson  
