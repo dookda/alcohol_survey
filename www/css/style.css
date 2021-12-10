@@ -80,7 +80,7 @@ Fonts
 @import url("owl.css");
 @import url("jquery-ui.min.css");
 @import url("select2.min.css");
-@import url("jquery.modal.min.css");
+/* @import url("jquery.modal.min.css"); */
 @import url("chosen.css");
 @import url("line-awesome.css");
 @import url("mmenu.css");
@@ -3936,7 +3936,7 @@ Login Popup
 .modal {
     height: auto;
     padding: 0;
-    max-width: 500px;
+    /* max-width: 500px; */
     overflow: visible;
     background: none;
     -webkit-box-shadow: 0px 6px 15px rgba(64, 79, 104, 0.05);

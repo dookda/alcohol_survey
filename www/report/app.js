@@ -1,27 +1,3 @@
-function initializeLiff() {
-    liff.init({
-        liffId: "1656610153-LnnDqMG5"
-    }).then((e) => {
-        if (!liff.isLoggedIn()) {
-            liff.login();
-        } else {
-            getUserid();
-        }
-    }).catch((err) => {
-        console.log(err);
-    });
-}
-
-async function getUserid() {
-    const profile = await liff.getProfile();
-    document.getElementById("usrid").value = await profile.userId;
-    document.getElementById("profile1").src = await profile.pictureUrl;
-    document.getElementById("displayName1").innerHTML = await profile.displayName;
-    document.getElementById("profile2").src = await profile.pictureUrl;
-    document.getElementById("displayName2").innerHTML = await profile.displayName;
-}
-
-// initializeLiff()
 
 // var url = 'https://rti2dss.com:4000';
 var url = 'http://localhost:4000'
@@ -153,7 +129,6 @@ let showData = async (objArr) => {
             </div>
             <ul class="job-other-info ">
                 <li class="f-16 privacy cursor" onclick="editData('${x.gid}')"><i class="bi bi-clipboard-data"></i> รายละเอียด</li>
-                <li class="required cursor" onclick="deleteData('${x.gid}')"><i class="bi bi-trash"></i> ลบ</li>
             </ul>
         </div>`
     })

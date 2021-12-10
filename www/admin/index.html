@@ -15,11 +15,11 @@
     <link href="./../css/style.css" rel="stylesheet">
     <link href="./../css/responsive.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <link rel="shortcut icon" href="./../images/favicon.png" type="image/x-icon">
     <link rel="icon" href="./../images/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-        crossorigin="" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./style.css">
 </head>
@@ -93,40 +93,9 @@
             <div class="auto-container">
                 <div class="content-column col-lg-12">
                     <div class="inner-column wow fadeInUp">
-                        <input type="hidden" id="usrid">
-
-                        <div class="row mb-3">
-                            <div class="default-form">
-                                <div class="form-group col-lg-12 col-md-12">
-                                    <input type="hidden" id="usrid">
-                                    <input type="text" id="find" placeholder="กรอกคำค้นหา.." onchange="findData()">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-lg-4 col-md-4">
-                                <div class="bg-white">
-                                    <div class="chartdiv p-5">
-                                        <span id="total"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group col-lg-8 col-md-8">
-                                <div class="bg-white">
-                                    <div class="chartdiv" id="chart1"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-lg-12 col-md-12">
-                                <div id="map"></div>
-                            </div>
-                        </div>
 
                         <div class="ls-outer">
+                            <input type="hidden" id="usrid">
                             <div class="row">
                                 <!-- Job Block-two -->
                                 <div class="job-block-two col-lg-12" id="content">
@@ -168,30 +137,44 @@
     </footer>
     <!-- End Main Footer -->
 
-
-    </div><!-- End Page Wrapper -->
+    <div class="modal hide fade" data-toggle="modal" data-backdrop="static" data-keyboard="false" id="modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    สำหรับผู้ดูแลระบบ
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="gotoDashboard()">ปิด</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <script src="./../js/jquery.js"></script>
     <script src="./../js/popper.min.js"></script>
-    <!-- <script src="./../js/chosen.min.js"></script> -->
+    <script src="./../js/chosen.min.js"></script>
     <script src="./../js/bootstrap.min.js"></script>
     <script src="./../js/jquery.fancybox.js"></script>
-    <!-- <script src="./../js/jquery.modal.min.js"></script> -->
-    <!-- <script src="./../js/mmenu.polyfills.js"></script> -->
+    <script src="./../js/jquery.modal.min.js"></script>
+    <script src="./../js/mmenu.polyfills.js"></script>
     <script src="./../js/mmenu.js"></script>
     <script src="./../js/appear.js"></script>
-    <!-- <script src="./../js/anm.min.js"></script> -->
-    <!-- <script src="./../js/owl.js"></script> -->
+    <script src="./../js/anm.min.js"></script>
+    <script src="./../js/owl.js"></script>
     <script src="./../js/wow.js"></script>
     <script src="./../js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
-    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script src="./app.js"></script>
