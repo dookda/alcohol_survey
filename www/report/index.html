@@ -89,14 +89,32 @@
                 <div class="content-column col-lg-12">
                     <div class="inner-column wow fadeInUp">
                         <input type="hidden" id="usrid">
-                        <div class="row">
+
+                        <div class="row mb-3">
                             <div class="default-form">
                                 <div class="form-group col-lg-12 col-md-12">
                                     <input type="hidden" id="usrid">
-                                    <input type="text" id="find" placeholder="ค้นหา.." onchange="findData()">
+                                    <input type="text" id="find" placeholder="กรอกคำค้นหา.." onchange="findData()">
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-4 col-md-4">
+                                <div class="bg-white">
+                                    <div class="chartdiv p-5">
+                                        <span id="total"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-8 col-md-8">
+                                <div class="bg-white">
+                                    <div class="chartdiv" id="chart1"></div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="ls-outer">
                             <div class="row">
                                 <!-- Job Block-two -->
@@ -157,6 +175,10 @@
     <script src="./../js/wow.js"></script>
     <script src="./../js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script src="./app.js"></script>

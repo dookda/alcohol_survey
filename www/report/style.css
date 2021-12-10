@@ -9,6 +9,17 @@ body{
     z-index: 1;
 }
 
+.chartdiv {
+    width: 100%;
+    height: 250px;
+}
+
+.bg-white {
+    padding: 5px;
+    background-color: white;
+    border-radius: 10px;
+}
+
 .cursor{
     cursor: pointer;
 }
