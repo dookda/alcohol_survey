@@ -37,7 +37,6 @@ initializeLiff()
 var url = 'https://rti2dss.com:4000';
 // var url = 'http://localhost:4000'
 
-
 let map = L.map('map', {
     center: [17.720, 100.050],
     zoom: 10,
