@@ -25,9 +25,9 @@ app.post("/alcohol-api/getdata", (req, res) => {
     const sql = `SELECT gid, pid, CONCAT(retail_name, owner_name, addresses, retail_type, product_type) as txt,
             retail_name, owner_name, retail_type, product_type, 
             certification, addresses, retail_status, alcohol_survey, alcohol, 
-            alcohol_item, cigarette_survey, cigarette, cigarette_item,lat,lng,
+            alcohol_item, cigarette_survey, cigarette, cigarette_item,lat,lng,tname,
             TO_CHAR(ts, 'DD-MM-YYYY') as ndate, img, ST_AsGeojson(geom) as geojson  
-        FROM ud_alcohol ORDER BY ts DESC`;
+        FROM v_ud_alcohol ORDER BY ts DESC`;
     // console.log(sql);
     db.query(sql).then(r => {
         res.status(200).json({
@@ -40,9 +40,9 @@ app.post("/alcohol-api/getselectdata", (req, res) => {
     const { gid } = req.body;
     const sql = `SELECT gid, pid, retail_name, owner_name, retail_type, product_type, 
         certification, addresses, retail_status, alcohol_survey, alcohol, 
-        alcohol_item, cigarette_survey, cigarette, cigarette_item,lat,lng,
+        alcohol_item, cigarette_survey, cigarette, cigarette_item,lat,lng,tname,
         TO_CHAR(ts, 'DD-MM-YYYY') as ndate, img, ST_AsGeojson(geom) as geojson  
-    FROM ud_alcohol WHERE gid='${gid}' ORDER BY ts DESC`;
+    FROM v_ud_alcohol WHERE gid='${gid}' ORDER BY ts DESC`;
 
     db.query(sql).then(r => {
         res.status(200).json({
