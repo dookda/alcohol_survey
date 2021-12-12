@@ -4,9 +4,19 @@ body{
 
 #map{
     width: 100%;
-    height: 360px;
+    height: 370px;
     border-radius: 10px;
     z-index: 1;
+}
+
+.chartTam{
+    width: 100%;
+    height: 750px;
+}
+
+.cntdiv {
+    width: 100%;
+    height: 90px;
 }
 
 .chartdiv {
@@ -33,6 +43,11 @@ body{
     font-size: 12px !important;
 }
 
+.f-24{
+    font-size: 24px !important;
+    font-weight: 800;
+}
+
 .kanit{
     font-family: 'Kanit', sans-serif;
 }
@@ -48,3 +63,4 @@ a{
 .main-menu .navigation > li.current > a, .main-menu .navigation > li.current > span{
     color: #000 !important;
 }
+

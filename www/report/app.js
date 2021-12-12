@@ -2,6 +2,13 @@
 var url = 'https://rti2dss.com:4000';
 // var url = 'http://localhost:4000'
 
+document.getElementById("total").innerHTML = `<div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span> </div>`
+document.getElementById("chart1").innerHTML = `<div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span> </div>`
+document.getElementById("chartdiv2").innerHTML = `<div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span> </div>`
+
 let map = L.map('map', {
     center: [17.720, 100.050],
     zoom: 10,

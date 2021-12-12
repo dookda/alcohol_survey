@@ -81,5 +81,5 @@ let setAdmin = (usrid, usertype) => {
     })
 }
 
-loadData()
+
 

@@ -13,9 +13,7 @@ function initializeLiff() {
 }
 
 var url = 'https://rti2dss.com:4000';
-// var url = 'http://localhost:3000'
-
-
+// var url = 'http://localhost:4000'
 
 let getData = (usrid) => {
     axios.post(url + "/alcohol-api/getuser", { usrid }).then((r) => {
