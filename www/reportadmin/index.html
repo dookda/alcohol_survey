@@ -103,12 +103,42 @@
                         <input type="hidden" id="usrid">
 
                         <div class="row mb-3">
-                            <div class="default-form">
+                            <!-- <div class="default-form">
                                 <div class="form-group col-lg-12 col-md-12">
+                                    <label for="">ค้นด้วยคำค้นหา</label>
                                     <input type="hidden" id="usrid">
                                     <input type="text" id="find" placeholder="กรอกคำค้นหา.." onchange="findData()">
                                 </div>
+                            </div> -->
+
+                            <div class="default-form">
+                                <div class="form-group col-lg-12 col-md-12">
+                                    <label for="">ค้นจากตำบล</label>
+                                    <input type="hidden" id="usrid">
+                                    <select class="select" id="tam">
+                                        <option value="">ทุกตำบล</option>
+                                        <option value="ท่าอิฐ">ท่าอิฐ</option>
+                                        <option value="ท่าเสา">ท่าเสา</option>
+                                        <option value="บ้านเกาะ">บ้านเกาะ</option>
+                                        <option value="ป่าเซ่า">ป่าเซ่า</option>
+                                        <option value="คุ้งตะเภา">คุ้งตะเภา</option>
+                                        <option value="วังกะพี้">วังกะพี้</option>
+                                        <option value="หาดกรวด">หาดกรวด</option>
+                                        <option value="น้ำริด">น้ำริด</option>
+                                        <option value="งิ้วงาม">งิ้วงาม</option>
+                                        <option value="ด่านนาขาม">ด่านนาขาม</option>
+                                        <option value="บ้านด่าน">บ้านด่าน</option>
+                                        <option value="ผาจุก">ผาจุก</option>
+                                        <option value="วังดิน">วังดิน</option>
+                                        <option value="แสนตอ">แสนตอ</option>
+                                        <option value="หาดงิ้ว">หาดงิ้ว</option>
+                                        <option value="ขุนฝาง">ขุนฝาง</option>
+                                        <option value="ถ้ำฉลอง">ถ้ำฉลอง</option>
+                                    </select>
+                                    <!-- <input type="text" id="find" placeholder="กรอกคำค้นหา.." onchange="findData()"> -->
+                                </div>
                             </div>
+
                         </div>
 
                         <div class="row">
@@ -182,7 +212,7 @@
 
     <script src="./../js/jquery.js"></script>
     <script src="./../js/popper.min.js"></script>
-    <!-- <script src="./../js/chosen.min.js"></script> -->
+    <script src="./../js/chosen.min.js"></script>
     <script src="./../js/bootstrap.min.js"></script>
     <script src="./../js/jquery.fancybox.js"></script>
     <!-- <script src="./../js/jquery.modal.min.js"></script> -->

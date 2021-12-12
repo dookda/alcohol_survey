@@ -35,8 +35,8 @@ let gotoDashboard = () => {
 initializeLiff()
 
 
-var url = 'https://rti2dss.com:4000';
-// var url = 'http://localhost:4000'
+// var url = 'https://rti2dss.com:4000';
+var url = 'http://localhost:4000'
 
 document.getElementById("total").innerHTML = `<div class="spinner-border" role="status">
         <span class="sr-only">Loading...</span> </div>`
@@ -303,8 +303,8 @@ let showData = async (objArr) => {
 
 let findData = () => {
     document.getElementById("content").innerHTML = "";
-    let find = document.getElementById('find').value;
-    let datFilter = datArr[0].filter(x => x.txt.includes(find))
+    let find = document.getElementById('tam').value;
+    let datFilter = datArr[0].filter(x => x.tname.includes(find))
     showData(datFilter)
 }
 
@@ -419,5 +419,5 @@ let editData = (gid) => {
     location.href = "./../edit/index.html?gid=" + gid;
 }
 
-// loadData()
+document.getElementById("tam").addEventListener("change", findData);
 

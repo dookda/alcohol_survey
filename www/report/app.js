@@ -267,8 +267,8 @@ let showData = async (objArr) => {
 
 let findData = () => {
     document.getElementById("content").innerHTML = "";
-    let find = document.getElementById('find').value;
-    let datFilter = datArr[0].filter(x => x.txt.includes(find))
+    let find = document.getElementById('tam').value;
+    let datFilter = datArr[0].filter(x => x.tname.includes(find))
     showData(datFilter)
 }
 
@@ -372,10 +372,11 @@ let tamChart = (tamArr) => {
     createSeries("alcohol_cigarat", "สุราและบุหรี่");
 }
 
-
 let editData = (gid) => {
     location.href = "./../edit/index.html?gid=" + gid;
 }
 
 loadData()
+document.getElementById("tam").addEventListener("change", findData);
+
 
