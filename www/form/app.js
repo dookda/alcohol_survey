@@ -21,7 +21,7 @@ async function getUserid() {
     document.getElementById("displayName2").innerHTML = await profile.displayName;
 }
 
-initializeLiff()
+// initializeLiff()
 
 var url = 'https://rti2dss.com:4000';
 // var url = 'http://localhost:3000'
@@ -183,12 +183,17 @@ let saveData = () => {
     console.log(obj);
 
     axios.post(url + '/alcohol-api/insert', obj).then((res) => {
-        editData()
+        // editData()
+        $("#ex5").modal({
+            escapeClose: false,
+            clickClose: false,
+            showClose: false
+        });
     })
 };
 
-
 let editData = () => {
+
 
     if (liff.getOS() == "web") {
         location.href = "./../report/index.html";

@@ -15,6 +15,8 @@
     <link href="./../css/style.css" rel="stylesheet">
     <link href="./../css/responsive.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
     <link rel="shortcut icon" href="./../images/favicon.png" type="image/x-icon">
     <link rel="icon" href="./../images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -254,6 +256,11 @@
                 </div>
             </div>
         </section>
+
+        <div id="ex5" class="modal">
+            <p>บันทึกข้อมูลสำเร็จ </p>
+            <button class="btn btn-success" onclick="editData()" rel="modal:close">ปิด</button>
+        </div>
     </div>
     <!-- End About Section -->
 
