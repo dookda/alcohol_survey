@@ -1,6 +1,6 @@
 
-var url = 'https://rti2dss.com:4000';
-// var url = 'http://localhost:4000'
+// var url = 'https://rti2dss.com:4000';
+var url = 'http://localhost:4000'
 
 document.getElementById("total").innerHTML = `<div class="spinner-border" role="status">
         <span class="sr-only">Loading...</span> </div>`
@@ -69,14 +69,16 @@ var overlayMap = {
 
 L.control.layers(baseMap, overlayMap).addTo(map);
 
-let xdata = axios.post(url + '/alcohol-api/getdata', { usrid: 'usrid' })
+let xdata = axios.get(url + '/alcohol-api/getdata')
 let datArr = []
 let loadData = () => {
     datArr = []
-    xdata.then((r) => {
+    xdata.then(async (r) => {
+        // console.log(r);
         datArr.push(r.data.data)
-        showData(r.data.data)
+        await showData(r.data.data)
     })
+
 }
 
 let removeLayer = () => {
@@ -134,8 +136,9 @@ let showData = async (objArr) => {
 
 
     document.getElementById("total").innerHTML = `จำนวนข้อมูลที่สำรวจ<br><span class="badge badge-success f-24"><b>${objArr.length}</b></span> แห่ง`
-
-    objArr.map(x => {
+    // console.log(objArr);
+    objArr.forEach((x) => {
+        // console.log(x);
         let img;
         if (x.product_type == "บุหรี่" || x.product_type == "บุหรี") {
             img = "cigarettes.png";
