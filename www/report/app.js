@@ -138,7 +138,6 @@ let showData = async (objArr) => {
     document.getElementById("total").innerHTML = `จำนวนข้อมูลที่สำรวจ<br><span class="badge badge-success f-24"><b>${objArr.length}</b></span> แห่ง`
     // console.log(objArr);
     objArr.forEach((x) => {
-        // console.log(x);
         let img;
         if (x.product_type == "บุหรี่" || x.product_type == "บุหรี") {
             img = "cigarettes.png";
