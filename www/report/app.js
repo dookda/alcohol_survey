@@ -75,8 +75,10 @@ let loadData = () => {
     datArr = []
     xdata.then(async (r) => {
         // console.log(r);
+
+        showMap(r.data.data)
         datArr.push(r.data.data)
-        await showData(r.data.data)
+        showData(r.data.data)
     })
 
 }
@@ -109,9 +111,17 @@ let loadMap = (x, img) => {
     }
 }
 
-let showData = async (objArr) => {
+let showMap = async (arr) => {
     removeLayer();
+    arr.map(x => {
+        x.product_type == "บุหรี่" || x.product_type == "บุหรี" ? loadMap(x, 'cigarettes.png') : null;
+        x.product_type == "สุรา" || x.product_type == "เหล้า" ? loadMap(x, 'alcohol.png') : null;
+        x.product_type == "บุหรี่และสุรา" || x.product_type == "เหล้าและบุหรี่" ? loadMap(x, 'no-alcohol.png') : null;
+    })
+    console.log(arr);
+}
 
+let showData = async (objArr) => {
     let alcohol = 0;
     let cigarat = 0;
     let alcohol_cigarat = 0;
@@ -134,25 +144,24 @@ let showData = async (objArr) => {
     let tam_16 = { tname: 'ขุนฝาง', alcohol: 0, cigarat: 0, alcohol_cigarat: 0 }
     let tam_17 = { tname: 'ถ้ำฉลอง', alcohol: 0, cigarat: 0, alcohol_cigarat: 0 }
 
-
     document.getElementById("total").innerHTML = `จำนวนข้อมูลที่สำรวจ<br><span class="badge badge-success f-24"><b>${objArr.length}</b></span> แห่ง`
     // console.log(objArr);
     objArr.forEach((x) => {
         let img;
-        if (x.product_type == "บุหรี่" || x.product_type == "บุหรี") {
-            img = "cigarettes.png";
-            alcohol += 1
-        }
+        // if (x.product_type == "บุหรี่" || x.product_type == "บุหรี") {
+        //     img = "cigarettes.png";
+        //     alcohol += 1
+        // }
 
-        if (x.product_type == "สุรา" || x.product_type == "เหล้า") {
-            img = "alcohol.png";
-            cigarat += 1
-        }
+        // if (x.product_type == "สุรา" || x.product_type == "เหล้า") {
+        //     img = "alcohol.png";
+        //     cigarat += 1
+        // }
 
-        if (x.product_type == "บุหรี่และสุรา" || x.product_type == "เหล้าและบุหรี่") {
-            img = "no-alcohol.png";
-            alcohol_cigarat += 1
-        }
+        // if (x.product_type == "บุหรี่และสุรา" || x.product_type == "เหล้าและบุหรี่") {
+        //     img = "no-alcohol.png";
+        //     alcohol_cigarat += 1
+        // }
 
         if (x.tname == "ท่าอิฐ") {
             x.product_type == "บุหรี่" ? tam_1.alcohol += 1 : null
@@ -240,7 +249,7 @@ let showData = async (objArr) => {
             x.product_type == "บุหรี่และสุรา" ? tam_17.alcohol_cigarat += 1 : null
         }
 
-        loadMap(x, img)
+
 
         document.getElementById("content").innerHTML += `<div class="inner-box mt-2" >
             <div class="content" >
