@@ -167,6 +167,7 @@ let saveData = () => {
             product_type: document.getElementById('product_type').value,
             certification: document.getElementById('certification').value,
             addresses: document.getElementById('addresses').value,
+            tname: document.getElementById('tname').value,
             retail_status: document.getElementById('retail_status').value,
             alcohol_survey: document.getElementById('alcohol_survey').value,
             alcohol: document.querySelector('input[name="alcohol"]:checked').value,

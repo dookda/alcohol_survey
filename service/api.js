@@ -7,10 +7,10 @@ app.post("/alcohol-api/getdataone", (req, res) => {
     const { proj_id } = req.body;
     // console.log(proj_id);
     const sql = `SELECT gid, proj_id, bioname, biodetail, bioplace, biotype, lat,lon,
-            pro, amp, tam, pro_name, amp_name, tam_name, 
+            pro, amp, tam, pro_name, amp_name, tam_name, aname,
             TO_CHAR(ndate, 'DD-MM-YYYY') as ndate, usrname, img,   
             ST_AsGeojson(geom) as geojson  
-        FROM ud_alcohol WHERE proj_id='${proj_id}'`;
+        FROM ud_alcohol_data WHERE proj_id='${proj_id}'`;
 
     db.query(sql).then(r => {
         res.status(200).json({
@@ -25,9 +25,9 @@ app.get("/alcohol-api/getdata", (req, res) => {
     const sql = `SELECT gid, pid, CONCAT(retail_name, owner_name, addresses, retail_type, product_type) as txt,
             retail_name, owner_name, retail_type, product_type, 
             certification, addresses, retail_status, alcohol_survey, alcohol, 
-            alcohol_item, cigarette_survey, cigarette, cigarette_item,lat,lng,tname,
+            alcohol_item, cigarette_survey, cigarette, cigarette_item,lat,lng,tname,aname,
             TO_CHAR(ts, 'DD-MM-YYYY') as ndate, ST_AsGeojson(geom) as geojson  
-        FROM ud_alcohol_data ORDER BY ts DESC`;
+        FROM back15022022 ORDER BY ts DESC`;
     // console.log(sql);
     db.query(sql).then(r => {
         res.status(200).json({
@@ -60,7 +60,7 @@ app.post("/alcohol-api/getselectdata", (req, res) => {
         certification, addresses, retail_status, alcohol_survey, alcohol, 
         alcohol_item, cigarette_survey, cigarette, cigarette_item,lat,lng,tname,
         TO_CHAR(ts, 'DD-MM-YYYY') as ndate, img, ST_AsGeojson(geom) as geojson  
-    FROM v_ud_alcohol WHERE gid='${gid}' ORDER BY ts DESC`;
+    FROM ud_alcohol_data WHERE gid='${gid}' ORDER BY ts DESC`;
 
     db.query(sql).then(r => {
         res.status(200).json({
@@ -72,18 +72,18 @@ app.post("/alcohol-api/getselectdata", (req, res) => {
 app.post("/alcohol-api/insert", async (req, res) => {
     const { data } = req.body;
     let pid = Date.now()
-    await db.query(`INSERT INTO ud_alcohol(pid, ts)VALUES('${pid}', now())`)
+    await db.query(`INSERT INTO ud_alcohol_data(pid, ts)VALUES('${pid}', now())`)
     let d;
     for (d in data) {
         // console.log(d, data[d]);
         if (data[d] !== '' && d !== 'geom') {
-            let sql = `UPDATE ud_alcohol SET ${d}='${data[d]}' WHERE pid='${pid}'`;
+            let sql = `UPDATE ud_alcohol_data SET ${d}='${data[d]}' WHERE pid='${pid}'`;
             await db.query(sql)
         }
     }
 
     if (data.geom !== "") {
-        let sql = `UPDATE ud_alcohol SET geom = ST_GeomfromGeoJSON('${JSON.stringify(data.geom.geometry)}') 
+        let sql = `UPDATE ud_alcohol_data SET geom = ST_GeomfromGeoJSON('${JSON.stringify(data.geom.geometry)}') 
             WHERE pid='${pid}'`;
         await db.query(sql)
     }
@@ -93,18 +93,18 @@ app.post("/alcohol-api/insert", async (req, res) => {
 })
 
 app.post("/alcohol-api/update", async (req, res) => {
-    const { pid, data } = req.body;
+    const { gid, data } = req.body;
     let d;
     for (d in data) {
         if (data[d] !== '' && d !== 'geom') {
-            let sql = `UPDATE ud_alcohol SET ${d}='${data[d]}', ts=now() WHERE pid='${pid}'`;
+            let sql = `UPDATE ud_alcohol_data SET ${d}='${data[d]}', ts=now() WHERE gid=${gid}`;
             await db.query(sql)
         }
     }
 
     if (data.geom !== "" && data.geom.geometry) {
-        let sql = `UPDATE ud_alcohol SET geom = ST_GeomfromGeoJSON('${JSON.stringify(data.geom.geometry)}') 
-            WHERE pid='${pid}'`;
+        let sql = `UPDATE ud_alcohol_data SET geom = ST_GeomfromGeoJSON('${JSON.stringify(data.geom.geometry)}') 
+            WHERE gid=${gid}`;
         await db.query(sql)
     }
     res.status(200).json({
@@ -114,8 +114,9 @@ app.post("/alcohol-api/update", async (req, res) => {
 
 app.post("/alcohol-api/delete", (req, res) => {
     const { gid } = req.body;
-    const sql = `DELETE FROM ud_alcohol WHERE gid='${gid}'`
-    // console.log(sql);
+    // console.log(gid);
+    const sql = `DELETE FROM back15022022 WHERE gid=${gid}`;
+    console.log(sql);
     db.query(sql).then(r => {
         res.status(200).json({
             data: "success"

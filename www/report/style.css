@@ -9,6 +9,10 @@ body{
     z-index: 1;
 }
 
+.btn-margin{
+    margin: 1px;
+}
+
 .chartTam{
     width: 100%;
     height: 750px;

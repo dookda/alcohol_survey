@@ -108,7 +108,7 @@
                                 <input type="text" id="owner_name" placeholder="ระบุชื่อ">
                             </div>
 
-                            <div class="form-group col-lg-6 col-md-12">
+                            <!-- <div class="form-group col-lg-6 col-md-12">
                                 <label>ประเภทร้าน</label>
                                 <input type="text" id="retail_type">
                             </div>
@@ -124,13 +124,77 @@
                             </div>
 
                             <div class="form-group col-lg-6 col-md-12">
+                                <label for="" class="form-label">ปัจจุบัน</label>
+                                <input type="text" id="retail_status">
+                            </div> -->
+
+                            <div class="form-group col-lg-6 col-md-12">
+                                <label>ประเภทร้าน</label>
+                                <select class="select" id="retail_type">
+                                    <option></option>
+                                    <option value="ร้านชำ">ร้านชำ</option>
+                                    <option value="ร้านขายปลีก">ร้านขายปลีก</option>
+                                    <option value="ขายส่ง">ขายส่ง</option>
+                                    <option value="ร้านอาหาร">ร้านอาหาร</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-lg-6 col-md-12">
+                                <label for="" class="form-label">จำหน่าย</label>
+                                <select class="select" id="product_type">
+                                    <option></option>
+                                    <option value="บุหรี่">บุหรี่</option>
+                                    <option value="สุรา">สุรา</option>
+                                    <option value="บุหรี่และสุรา">บุหรี่และสุรา</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-lg-6 col-md-12">
+                                <label for="" class="form-label">ใบอนุญาตจำหน่าย</label>
+                                <select class="select" id="certification">
+                                    <option value=""></option>
+                                    <option value="มี">มี</option>
+                                    <option value="ไม่มี">ไม่มี</option>
+                                </select>
+                            </div>
+
+
+                            <div class="form-group col-lg-6 col-md-12">
+                                <label for="" class="form-label">ปัจจุบัน</label>
+                                <select class="select" id="retail_status">
+                                    <option value=""></option>
+                                    <option value="ขาย">ขาย</option>
+                                    <option value="เลิกขาย">เลิกขาย</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-lg-6 col-md-12">
                                 <label for="" class="form-label">ที่อยู่</label>
                                 <input type="text" id="addresses">
                             </div>
 
                             <div class="form-group col-lg-6 col-md-12">
-                                <label for="" class="form-label">ปัจจุบัน</label>
-                                <input type="text" id="retail_status">
+                                <label for="">ตำบล</label>
+                                <select class="select" id="tname">
+                                    <option value=""></option>
+                                    <option value="ท่าอิฐ">ท่าอิฐ</option>
+                                    <option value="ท่าเสา">ท่าเสา</option>
+                                    <option value="บ้านเกาะ">บ้านเกาะ</option>
+                                    <option value="ป่าเซ่า">ป่าเซ่า</option>
+                                    <option value="คุ้งตะเภา">คุ้งตะเภา</option>
+                                    <option value="วังกะพี้">วังกะพี้</option>
+                                    <option value="หาดกรวด">หาดกรวด</option>
+                                    <option value="น้ำริด">น้ำริด</option>
+                                    <option value="งิ้วงาม">งิ้วงาม</option>
+                                    <option value="ด่านนาขาม">ด่านนาขาม</option>
+                                    <option value="บ้านด่าน">บ้านด่าน</option>
+                                    <option value="ผาจุก">ผาจุก</option>
+                                    <option value="วังดิน">วังดิน</option>
+                                    <option value="แสนตอ">แสนตอ</option>
+                                    <option value="หาดงิ้ว">หาดงิ้ว</option>
+                                    <option value="ขุนฝาง">ขุนฝาง</option>
+                                    <option value="ถ้ำฉลอง">ถ้ำฉลอง</option>
+                                </select>
                             </div>
 
                             <div class="form-group col-lg-12 col-md-12">
@@ -204,7 +268,9 @@
                     <div class="default-form mt-5">
                         <div class="row ">
                             <div class="form-group col-lg-12 col-md-12">
-                                <button class="btn btn-success" onclick="saveData()"><i class="bi bi-save"></i>
+                                <button class="btn btn-success" onclick="gotoReport()"><i class="bi bi-save"></i>
+                                    กลับหน้ารายงาน</button>
+                                <button class="btn btn-warning" onclick="saveData()"><i class="bi bi-save"></i>
                                     บันทึก</button>
                             </div>
                         </div>

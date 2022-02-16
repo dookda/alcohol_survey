@@ -21,7 +21,7 @@ async function getUserid() {
     document.getElementById("displayName2").innerHTML = await profile.displayName;
 }
 
-initializeLiff()
+// initializeLiff()
 
 var url = 'https://rti2dss.com:4000';
 // var url = 'http://localhost:4000';
@@ -99,20 +99,21 @@ let getData = (gid) => {
 
         console.log(r);
 
-        document.getElementById('retail_name').value = r.data.data[0].retail_name
-        document.getElementById('owner_name').value = r.data.data[0].owner_name
-        document.getElementById('retail_type').value = r.data.data[0].retail_type
-        document.getElementById('product_type').value = r.data.data[0].product_type
-        document.getElementById('certification').value = r.data.data[0].certification
-        document.getElementById('addresses').value = r.data.data[0].addresses
-        document.getElementById('retail_status').value = r.data.data[0].retail_status
-        document.getElementById('alcohol_survey').value = r.data.data[0].alcohol_survey
+        document.getElementById('retail_name').value = r.data.data[0].retail_name;
+        document.getElementById('owner_name').value = r.data.data[0].owner_name;
+        document.getElementById('retail_type').value = r.data.data[0].retail_type;
+        document.getElementById('product_type').value = r.data.data[0].product_type;
+        document.getElementById('certification').value = r.data.data[0].certification;
+        document.getElementById('addresses').value = r.data.data[0].addresses;
+        document.getElementById('tname').value = r.data.data[0].tname;
+        document.getElementById('retail_status').value = r.data.data[0].retail_status;
+        document.getElementById('alcohol_survey').value = r.data.data[0].alcohol_survey;
         //   document.querySelector('input[name="alcohol"]:checked').value,
-        document.getElementById('alcohol_item').value = r.data.data[0].alcohol_item
-        document.getElementById('cigarette_survey').value = r.data.data[0].cigarette_survey
+        document.getElementById('alcohol_item').value = r.data.data[0].alcohol_item;
+        document.getElementById('cigarette_survey').value = r.data.data[0].cigarette_survey;
         //  document.querySelector('input[name="cigarette"]:checked').value,
-        document.getElementById('cigarette_item').value = r.data.data[0].cigarette_item
-        document.getElementById('preview').src = r.data.data[0].img
+        document.getElementById('cigarette_item').value = r.data.data[0].cigarette_item;
+        document.getElementById('preview').src = r.data.data[0].img;
         sessionStorage.removeItem("gid");
         // console.log(r.data.data[0].geojson);
         if (r.data.data[0].geojson) {
@@ -185,6 +186,7 @@ let saveData = () => {
             product_type: document.getElementById('product_type').value,
             certification: document.getElementById('certification').value,
             addresses: document.getElementById('addresses').value,
+            tname: document.getElementById('tname').value,
             retail_status: document.getElementById('retail_status').value,
             alcohol_survey: document.getElementById('alcohol_survey').value,
             alcohol: document.querySelector('input[name="alcohol"]:checked').value,
@@ -198,6 +200,8 @@ let saveData = () => {
             geom: geom == "" ? "" : geom.toGeoJSON()
         }
     }
+
+    // console.log(obj);
 
     axios.post(url + '/alcohol-api/update', obj).then((res) => {
         gotoReport()

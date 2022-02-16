@@ -22,6 +22,10 @@
         crossorigin="" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <link rel="stylesheet" href="./style.css">
 </head>
 
@@ -96,36 +100,6 @@
                     <div class="inner-column wow fadeInUp">
                         <input type="hidden" id="usrid">
 
-                        <div class="row mb-3">
-                            <div class="default-form">
-                                <div class="form-group col-lg-12 col-md-12">
-                                    <label for="">ค้นจากตำบล</label>
-                                    <input type="hidden" id="usrid">
-                                    <select class="select" id="tam">
-                                        <option value="">ทุกตำบล</option>
-                                        <option value="ท่าอิฐ">ท่าอิฐ</option>
-                                        <option value="ท่าเสา">ท่าเสา</option>
-                                        <option value="บ้านเกาะ">บ้านเกาะ</option>
-                                        <option value="ป่าเซ่า">ป่าเซ่า</option>
-                                        <option value="คุ้งตะเภา">คุ้งตะเภา</option>
-                                        <option value="วังกะพี้">วังกะพี้</option>
-                                        <option value="หาดกรวด">หาดกรวด</option>
-                                        <option value="น้ำริด">น้ำริด</option>
-                                        <option value="งิ้วงาม">งิ้วงาม</option>
-                                        <option value="ด่านนาขาม">ด่านนาขาม</option>
-                                        <option value="บ้านด่าน">บ้านด่าน</option>
-                                        <option value="ผาจุก">ผาจุก</option>
-                                        <option value="วังดิน">วังดิน</option>
-                                        <option value="แสนตอ">แสนตอ</option>
-                                        <option value="หาดงิ้ว">หาดงิ้ว</option>
-                                        <option value="ขุนฝาง">ขุนฝาง</option>
-                                        <option value="ถ้ำฉลอง">ถ้ำฉลอง</option>
-                                    </select>
-                                    <!-- <input type="text" id="find" placeholder="กรอกคำค้นหา.." onchange="findData()"> -->
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="row">
                             <div class="form-group col-lg-6 col-md-6">
                                 <div class="bg-white mb-3">
@@ -145,20 +119,45 @@
                             </div>
                         </div>
 
-                        <!-- <div class="ls-outer">
-                            <div class="row">
-                                <div class="job-block-two col-lg-12" id="content">
-
-                                </div>
+                        <div class="default-form">
+                            <div class="form-group col-lg-12 col-md-12">
+                                <label for="">ค้นจากตำบล</label>
+                                <input type="hidden" id="usrid">
+                                <select class="select" id="tam">
+                                    <option value="">ทุกตำบล</option>
+                                    <option value="ท่าอิฐ">ท่าอิฐ</option>
+                                    <option value="ท่าเสา">ท่าเสา</option>
+                                    <option value="บ้านเกาะ">บ้านเกาะ</option>
+                                    <option value="ป่าเซ่า">ป่าเซ่า</option>
+                                    <option value="คุ้งตะเภา">คุ้งตะเภา</option>
+                                    <option value="วังกะพี้">วังกะพี้</option>
+                                    <option value="หาดกรวด">หาดกรวด</option>
+                                    <option value="น้ำริด">น้ำริด</option>
+                                    <option value="งิ้วงาม">งิ้วงาม</option>
+                                    <option value="ด่านนาขาม">ด่านนาขาม</option>
+                                    <option value="บ้านด่าน">บ้านด่าน</option>
+                                    <option value="ผาจุก">ผาจุก</option>
+                                    <option value="วังดิน">วังดิน</option>
+                                    <option value="แสนตอ">แสนตอ</option>
+                                    <option value="หาดงิ้ว">หาดงิ้ว</option>
+                                    <option value="ขุนฝาง">ขุนฝาง</option>
+                                    <option value="ถ้ำฉลอง">ถ้ำฉลอง</option>
+                                </select>
+                                <!-- <input type="text" id="find" placeholder="กรอกคำค้นหา.." onchange="findData()"> -->
                             </div>
-                        </div> -->
+                        </div>
+                        <p></p>
+
                         <div class="bg-white">
                             <table id="example" class="display wrap" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>City</th>
-                                        <th>Description</th>
-                                        <th>Device Name</th>
+                                        <th>id</th>
+                                        <th>ชื่อร้าน</th>
+                                        <th>ประเภท</th>
+                                        <th>เจ้าของร้าน</th>
+                                        <th>ตำบล</th>
+                                        <th>..</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -170,6 +169,34 @@
         </section>
     </div>
     <!-- End About Section -->
+
+    <div class="modal" id="deleteModal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="w3-animate-top"></div>
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <i class="bi bi-file-earmark-excel-fill text-danger mr-2" style="font-size: 26px;"></i>
+                        ยืนยันการลบข้อมูล
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body text-center">
+                    <p style="font-size: 18px;">ท่านต้องการลบข้อมูล
+                        <b> id <span id="gidlabel"></span> </b> ใช่หรือไม่?
+                        <input type="hidden" id="gid">
+                    </p>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="deleteValue()">ยืนยัน</button>
+                    <button type="button" class="btn btn-light" onclick="closeModal()">ยกเลิก</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -216,6 +243,20 @@
     <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
     <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
 
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script src='https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js'></script>

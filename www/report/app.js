@@ -1,6 +1,6 @@
 
-// var url = 'https://rti2dss.com:4000';
-var url = 'http://localhost:4000'
+var url = 'https://rti2dss.com:4000';
+// var url = 'http://localhost:4000';
 
 document.getElementById("total").innerHTML = `<div class="spinner-border" role="status">
         <span class="sr-only">Loading...</span> </div>`
@@ -136,8 +136,27 @@ let showMap = async (arr) => {
         x.product_type == "บุหรี่และสุรา" || x.product_type == "เหล้าและบุหรี่" ? loadMap(x, 'no-alcohol.png') : null;
         x.product_type == "สุรา" || x.product_type == "เหล้า" ? loadMap(x, 'alcohol.png') : null;
         x.product_type == "บุหรี่" || x.product_type == "บุหรี" ? loadMap(x, 'cigarettes.png') : null;
-    })
-    // console.log(arr);
+    });
+}
+
+let zoomMap = (lon, lat, retail_name, owner_name, product_type) => {
+    map.setView([lat, lon], 14);
+    let img;
+    product_type == "บุหรี่และสุรา" || product_type == "เหล้าและบุหรี่" ? img = 'no-alcohol.png' : product_type == "สุรา" || product_type == "เหล้า" ? img = 'alcohol.png' : img = 'cigarettes.png';
+
+    L.popup({ offset: L.point(5, -24) })
+        .setLatLng([lat, lon])
+        .setContent(`<div class="row">
+                        <div class="col-4">
+                            <img src="./../images/${img}" alt="" width="50px">
+                        </div>
+                        <div class="col-8 f-popup">
+                            <b>ชื่อร้าน:</b> ${retail_name}
+                            <br><b>เจ้าของ:</b> ${owner_name}
+                            <br><b>ประเภทที่จำหน่าย:</b> ${product_type}
+                        </div>
+                    </div>`)
+        .openOn(map);
 }
 
 let groupTam = (data) => {
@@ -164,6 +183,25 @@ let groupTam = (data) => {
 }
 
 let showData = async () => {
+    $.extend(true, $.fn.dataTable.defaults, {
+        "language": {
+            "sProcessing": "กำลังดำเนินการ...",
+            "sLengthMenu": "แสดง_MENU_ แถว",
+            "sZeroRecords": "ไม่พบข้อมูล",
+            "sInfo": "แสดง _START_ ถึง _END_ จาก _TOTAL_ แถว",
+            "sInfoEmpty": "แสดง 0 ถึง 0 จาก 0 แถว",
+            "sInfoFiltered": "(กรองข้อมูล _MAX_ ทุกแถว)",
+            "sInfoPostFix": "",
+            "sSearch": "ค้นหา:",
+            "sUrl": "",
+            "oPaginate": {
+                "sFirst": "เริ่มต้น",
+                "sPrevious": "ก่อนหน้า",
+                "sNext": "ถัดไป",
+                "sLast": "สุดท้าย"
+            }
+        }
+    });
     let table = $('#example').DataTable({
         ajax: {
             url: '/alcohol-api/getdata',
@@ -172,8 +210,26 @@ let showData = async () => {
         },
         columns: [
             { data: 'gid' },
-            { data: 'pid' },
-            { data: 'txt' }
+            { data: 'retail_name' },
+            { data: 'product_type' },
+            { data: 'owner_name' },
+            { data: 'tname' },
+            {
+                data: null,
+                render: function (data, type, row, meta) {
+                    const json = JSON.parse(data.geojson);
+
+                    return `
+                    <button onclick="zoomMap(${json.coordinates[0]},${json.coordinates[1]},'${data.retail_name}','${data.owner_name}','${data.retail_type}')" class="btn btn-margin btn-success" ><i class="bi bi-map"></i> ซูม</button>
+                    <button onclick="editData(${data.gid})" class="btn btn-margin btn-warning" ><i class="bi bi-clipboard-data"></i> แก้ไข</button>
+                    `
+                    // <button onclick="deleteData(${data.gid})" class="btn btn-margin btn-danger" ><i class="bi bi-clipboard-x"></i> ลบ</button>
+                },
+            },
+        ],
+        dom: 'Bfrtip',
+        buttons: [
+            'excel', 'print'
         ],
         responsive: true
     });
@@ -192,11 +248,30 @@ let showData = async () => {
     document.getElementById("tam").addEventListener("change", findData);
 }
 
-let findData = () => {
-    document.getElementById("content").innerHTML = "";
-    let find = document.getElementById('tam').value;
-    let datFilter = datArr[0].filter(x => x.tname.includes(find))
-    showData(datFilter)
+let editData = (gid) => {
+    location.href = "./../edit/index.html?gid=" + gid;
+}
+
+let deleteData = (gid) => {
+    $("#gid").val(gid)
+    $("#gidlabel").text(gid)
+    $("#deleteModal").modal("show")
+}
+
+let closeModal = () => {
+    // $('#editModal').modal('hide')
+    $('#deleteModal').modal('hide')
+    // $('#example').DataTable().ajax.reload();
+}
+
+let deleteValue = () => {
+    // console.log($("#projId").val());
+    $("#deleteModal").modal("hide");
+    let gid = $("#gid").val();
+    axios.post("/alcohol-api/delete", { gid }).then(r => {
+        r.data.data == "success" ? closeModal() : null
+        $('#example').DataTable().ajax.reload();
+    })
 }
 
 // chart.dispose();
@@ -289,9 +364,6 @@ let tamChart = (tamArr) => {
 
 }
 
-let editData = (gid) => {
-    location.href = "./../edit/index.html?gid=" + gid;
-}
 
 loadData()
 
