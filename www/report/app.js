@@ -75,12 +75,9 @@ let loadData = () => {
     datArr = []
     xdata.then(async (r) => {
         // console.log(r);
-
-
         datArr.push(r.data.data)
         showData(r.data.data)
     })
-
 }
 
 let removeLayer = () => {
@@ -90,11 +87,33 @@ let removeLayer = () => {
 }
 
 let loadMap = (x, img) => {
+    const ciga = L.icon({
+        iconUrl: "./../images/ciga.png",
+        iconSize: [32, 35],
+        iconAnchor: [12, 37],
+        popupAnchor: [5, -30]
+    });
+
+    const alcohol = L.icon({
+        iconUrl: "./../images/alco.png",
+        iconSize: [32, 35],
+        iconAnchor: [12, 37],
+        popupAnchor: [5, -30]
+    });
+
+    const both = L.icon({
+        iconUrl: "./../images/both.png",
+        iconSize: [32, 35],
+        iconAnchor: [12, 37],
+        popupAnchor: [5, -30]
+    });
+
     if (x.geojson) {
         let json = JSON.parse(x.geojson).coordinates;
         let marker = L.marker([json[1], json[0]], {
             draggable: false,
-            name: 'p'
+            name: 'p',
+            icon: x.product_type == "บุหรี่" ? ciga : x.product_type == "เหล้า" ? alcohol : both
         })
 
         marker.bindPopup(`<div class="row">
@@ -114,36 +133,40 @@ let loadMap = (x, img) => {
 let showMap = async (arr) => {
     removeLayer();
     arr.map(x => {
-        x.product_type == "บุหรี่" || x.product_type == "บุหรี" ? loadMap(x, 'cigarettes.png') : null;
-        x.product_type == "สุรา" || x.product_type == "เหล้า" ? loadMap(x, 'alcohol.png') : null;
         x.product_type == "บุหรี่และสุรา" || x.product_type == "เหล้าและบุหรี่" ? loadMap(x, 'no-alcohol.png') : null;
+        x.product_type == "สุรา" || x.product_type == "เหล้า" ? loadMap(x, 'alcohol.png') : null;
+        x.product_type == "บุหรี่" || x.product_type == "บุหรี" ? loadMap(x, 'cigarettes.png') : null;
     })
-    console.log(arr);
+    // console.log(arr);
 }
 
 let groupTam = (data) => {
+    document.getElementById("total").innerHTML = `จำนวนข้อมูลที่สำรวจ<br><span class="badge badge-success f-24"><b>${data.length}</b></span> แห่ง`;
+
     let tam = [{ tname: 'ท่าอิฐ' }, { tname: 'ท่าเสา' }, { tname: 'บ้านเกาะ' }, { tname: 'ป่าเซ่า' }, { tname: 'คุ้งตะเภา' }, { tname: 'วังกะพี้' }, { tname: 'หาดกรวด' }, { tname: 'น้ำริด' }, { tname: 'งิ้วงาม' }, { tname: 'ด่านนาขาม' }, { tname: 'บ้านด่าน' }, { tname: 'ผาจุก' }, { tname: 'วังดิน' }, { tname: 'แสนตอ' }, { tname: 'หาดงิ้ว' }, { tname: 'ขุนฝาง' }, { tname: 'ถ้ำฉลอง' }];
 
     let ciga = data.filter(x => x.product_type == "บุหรี่" || x.product_type == "บุหรี")
-    var cigat = _(ciga).groupBy('tname').map((i, name) => ({ tname: name, cigcaCnt: i.length })).value();
+    var cigat = _(ciga).groupBy('tname').map((i, name) => ({ tname: name, cigarat: i.length })).value();
 
     let alcohol = data.filter(x => x.product_type == "สุรา" || x.product_type == "เหล้า")
-    var alcoholt = _(alcohol).groupBy('tname').map((i, name) => ({ tname: name, alcoCnt: i.length })).value();
+    var alcoholt = _(alcohol).groupBy('tname').map((i, name) => ({ tname: name, alcohol: i.length })).value();
 
     let both = data.filter(x => x.product_type == "บุหรี่และสุรา" || x.product_type == "เหล้าและบุหรี่")
-    var botht = _(both).groupBy('tname').map((i, name) => ({ tname: name, bothCnt: i.length })).value();
+    var botht = _(both).groupBy('tname').map((i, name) => ({ tname: name, alcohol_cigarat: i.length })).value();
 
+    const a3 = tam.map(t1 => ({ ...t1, ...cigat.find(t2 => t2.tname === t1.tname) }));
+    const a4 = a3.map(t1 => ({ ...t1, ...alcoholt.find(t2 => t2.tname === t1.tname) }));
+    const a5 = a4.map(t1 => ({ ...t1, ...botht.find(t2 => t2.tname === t1.tname) }));
+    tamChart(a5);
 
-    const a3 = tam.map(t1 => ({ ...t1, ...cigat.find(t2 => t2.tname === t1.tname) }))
-    const a4 = a3.map(t1 => ({ ...t1, ...alcoholt.find(t2 => t2.tname === t1.tname) }))
-    const a5 = a4.map(t1 => ({ ...t1, ...botht.find(t2 => t2.tname === t1.tname) }))
-
+    let summbyType = _(data).groupBy('product_type').map((i, name) => ({ type: name, value: i.length })).value();
+    loadChart(summbyType, "chart1");
 }
 
 let showData = async () => {
     let table = $('#example').DataTable({
         ajax: {
-            url: 'http://localhost:4000/alcohol-api/getdata',
+            url: '/alcohol-api/getdata',
             dataSrc: 'data',
             cache: true,
         },
@@ -161,162 +184,12 @@ let showData = async () => {
         showMap(data)
         groupTam(data)
     });
-}
 
-let showData2 = async (objArr) => {
-    let cigarat = 0;
-    let alcohol_cigarat = 0;
-
-    let tam_1 = { tname: 'ท่าอิฐ', alcohol: 0, cigarat: 0, alcohol_cigarat: 0 }
-    let tam_2 = { tname: 'ท่าเสา', alcohol: 0, cigarat: 0, alcohol_cigarat: 0 }
-    let tam_3 = { tname: 'บ้านเกาะ', alcohol: 0, cigarat: 0, alcohol_cigarat: 0 }
-    let tam_4 = { tname: 'ป่าเซ่า', alcohol: 0, cigarat: 0, alcohol_cigarat: 0 }
-    let tam_5 = { tname: 'คุ้งตะเภา', alcohol: 0, cigarat: 0, alcohol_cigarat: 0 }
-    let tam_6 = { tname: 'วังกะพี้', alcohol: 0, cigarat: 0, alcohol_cigarat: 0 }
-    let tam_7 = { tname: 'หาดกรวด', alcohol: 0, cigarat: 0, alcohol_cigarat: 0 }
-    let tam_8 = { tname: 'น้ำริด', alcohol: 0, cigarat: 0, alcohol_cigarat: 0 }
-    let tam_9 = { tname: 'งิ้วงาม', alcohol: 0, cigarat: 0, alcohol_cigarat: 0 }
-    let tam_10 = { tname: 'ด่านนาขาม', alcohol: 0, cigarat: 0, alcohol_cigarat: 0 }
-    let tam_11 = { tname: 'บ้านด่าน', alcohol: 0, cigarat: 0, alcohol_cigarat: 0 }
-    let tam_12 = { tname: 'ผาจุก', alcohol: 0, cigarat: 0, alcohol_cigarat: 0 }
-    let tam_13 = { tname: 'วังดิน', alcohol: 0, cigarat: 0, alcohol_cigarat: 0 }
-    let tam_14 = { tname: 'แสนตอ', alcohol: 0, cigarat: 0, alcohol_cigarat: 0 }
-    let tam_15 = { tname: 'หาดงิ้ว', alcohol: 0, cigarat: 0, alcohol_cigarat: 0 }
-    let tam_16 = { tname: 'ขุนฝาง', alcohol: 0, cigarat: 0, alcohol_cigarat: 0 }
-    let tam_17 = { tname: 'ถ้ำฉลอง', alcohol: 0, cigarat: 0, alcohol_cigarat: 0 }
-
-    document.getElementById("total").innerHTML = `จำนวนข้อมูลที่สำรวจ<br><span class="badge badge-success f-24"><b>${objArr.length}</b></span> แห่ง`
-    // console.log(objArr);
-    objArr.map((x) => {
-        let img;
-        // if (x.product_type == "บุหรี่" || x.product_type == "บุหรี") {
-        //     img = "cigarettes.png";
-        //     alcohol += 1
-        // }
-
-        // if (x.product_type == "สุรา" || x.product_type == "เหล้า") {
-        //     img = "alcohol.png";
-        //     cigarat += 1
-        // }
-
-        // if (x.product_type == "บุหรี่และสุรา" || x.product_type == "เหล้าและบุหรี่") {
-        //     img = "no-alcohol.png";
-        //     alcohol_cigarat += 1
-        // }
-
-        console.log(x);
-
-        // if (x.tname == "ท่าอิฐ") {
-        //     x.product_type == "บุหรี่" ? tam_1.alcohol += 1 : null
-        //     x.product_type == "สุรา" ? tam_1.cigarat += 1 : null
-        //     x.product_type == "บุหรี่และสุรา" ? tam_1.alcohol_cigarat += 1 : null
-        // }
-        // if (x.tname == "ท่าเสา") {
-        //     x.product_type == "บุหรี่" ? tam_2.alcohol += 1 : null
-        //     x.product_type == "สุรา" ? tam_2.cigarat += 1 : null
-        //     x.product_type == "บุหรี่และสุรา" ? tam_2.alcohol_cigarat += 1 : null
-        // }
-        // if (x.tname == "บ้านเกาะ") {
-        //     x.product_type == "บุหรี่" ? tam_3.alcohol += 1 : null
-        //     x.product_type == "สุรา" ? tam_3.cigarat += 1 : null
-        //     x.product_type == "บุหรี่และสุรา" ? tam_3.alcohol_cigarat += 1 : null
-        // }
-        // if (x.tname == "ป่าเซ่า") {
-        //     x.product_type == "บุหรี่" ? tam_4.alcohol += 1 : null
-        //     x.product_type == "สุรา" ? tam_4.cigarat += 1 : null
-        //     x.product_type == "บุหรี่และสุรา" ? tam_4.alcohol_cigarat += 1 : null
-        // }
-        // if (x.tname == "คุ้งตะเภา") {
-        //     x.product_type == "บุหรี่" ? tam_5.alcohol += 1 : null
-        //     x.product_type == "สุรา" ? tam_5.cigarat += 1 : null
-        //     x.product_type == "บุหรี่และสุรา" ? tam_5.alcohol_cigarat += 1 : null
-        // }
-        // if (x.tname == "วังกะพี้") {
-        //     x.product_type == "บุหรี่" ? tam_6.alcohol += 1 : null
-        //     x.product_type == "สุรา" ? tam_6.cigarat += 1 : null
-        //     x.product_type == "บุหรี่และสุรา" ? tam_6.alcohol_cigarat += 1 : null
-        // }
-        // if (x.tname == "หาดกรวด") {
-        //     x.product_type == "บุหรี่" ? tam_7.alcohol += 1 : null
-        //     x.product_type == "สุรา" ? tam_7.cigarat += 1 : null
-        //     x.product_type == "บุหรี่และสุรา" ? tam_7.alcohol_cigarat += 1 : null
-        // }
-        // if (x.tname == "น้ำริด") {
-        //     x.product_type == "บุหรี่" ? tam_8.alcohol += 1 : null
-        //     x.product_type == "สุรา" ? tam_8.cigarat += 1 : null
-        //     x.product_type == "บุหรี่และสุรา" ? tam_8.alcohol_cigarat += 1 : null
-        // }
-        // if (x.tname == "งิ้วงาม") {
-        //     x.product_type == "บุหรี่" ? tam_9.alcohol += 1 : null
-        //     x.product_type == "สุรา" ? tam_9.cigarat += 1 : null
-        //     x.product_type == "บุหรี่และสุรา" ? tam_9.alcohol_cigarat += 1 : null
-        // }
-        // if (x.tname == "ด่านนาขาม") {
-        //     x.product_type == "บุหรี่" ? tam_10.alcohol += 1 : null
-        //     x.product_type == "สุรา" ? tam_10.cigarat += 1 : null
-        //     x.product_type == "บุหรี่และสุรา" ? tam_10.alcohol_cigarat += 1 : null
-        // }
-        // if (x.tname == "บ้านด่าน") {
-        //     x.product_type == "บุหรี่" ? tam_11.alcohol += 1 : null
-        //     x.product_type == "สุรา" ? tam_11.cigarat += 1 : null
-        //     x.product_type == "บุหรี่และสุรา" ? tam_11.alcohol_cigarat += 1 : null
-        // }
-        // if (x.tname == "ผาจุก") {
-        //     x.product_type == "บุหรี่" ? tam_12.alcohol += 1 : null
-        //     x.product_type == "สุรา" ? tam_12.cigarat += 1 : null
-        //     x.product_type == "บุหรี่และสุรา" ? tam_12.alcohol_cigarat += 1 : null
-        // }
-        // if (x.tname == "วังดิน") {
-        //     x.product_type == "บุหรี่" ? tam_13.alcohol += 1 : null
-        //     x.product_type == "สุรา" ? tam_13.cigarat += 1 : null
-        //     x.product_type == "บุหรี่และสุรา" ? tam_13.alcohol_cigarat += 1 : null
-        // }
-        // if (x.tname == "แสนตอ") {
-        //     x.product_type == "บุหรี่" ? tam_14.alcohol += 1 : null
-        //     x.product_type == "สุรา" ? tam_14.cigarat += 1 : null
-        //     x.product_type == "บุหรี่และสุรา" ? tam_14.alcohol_cigarat += 1 : null
-        // }
-        // if (x.tname == "หาดงิ้ว") {
-        //     x.product_type == "บุหรี่" ? tam_15.alcohol += 1 : null
-        //     x.product_type == "สุรา" ? tam_15.cigarat += 1 : null
-        //     x.product_type == "บุหรี่และสุรา" ? tam_15.alcohol_cigarat += 1 : null
-        // }
-        // if (x.tname == "ขุนฝาง") {
-        //     x.product_type == "บุหรี่" ? tam_16.alcohol += 1 : null
-        //     x.product_type == "สุรา" ? tam_16.cigarat += 1 : null
-        //     x.product_type == "บุหรี่และสุรา" ? tam_16.alcohol_cigarat += 1 : null
-        // }
-        // if (x.tname == "ถ้ำฉลอง") {
-        //     x.product_type == "บุหรี่" ? tam_17.alcohol += 1 : null
-        //     x.product_type == "สุรา" ? tam_17.cigarat += 1 : null
-        //     x.product_type == "บุหรี่และสุรา" ? tam_17.alcohol_cigarat += 1 : null
-        // }
-
-
-
-        document.getElementById("content").innerHTML += `<div class="inner-box mt-2" >
-            <div class="content" >
-                <span class="company-logo"><img src="./../images/${img}" alt=""></span>
-                <h4><span>${x.retail_name}</span></h4>
-                <span>${x.owner_name}</span>
-                <ul class="job-info">
-                    <li><i class="bi bi-cart3"></i>&nbsp;${x.product_type}</li>
-                    <li><i class="bi bi-journal-check"></i>&nbsp;ใบอนุญาต: ${x.certification}</li>
-                    <li><i class="bi bi-calendar-week"></i>&nbsp;วันที่สำรวจ: ${x.ndate}</li>
-                </ul>
-            </div>
-            <ul class="job-other-info ">
-                <li class="f-16 privacy cursor" onclick="editData('${x.gid}')"><i class="bi bi-clipboard-data"></i> รายละเอียด</li>
-                <li class="required cursor" onclick="deleteData('${x.gid}')"><i class="bi bi-trash"></i> ลบ</li>
-            </ul>
-        </div>`
-    })
-
-    // console.log(alcohol, cigarat, alcohol_cigarat);
-    let tamArr = [tam_1, tam_2, tam_3, tam_4, tam_5, tam_6, tam_7, tam_8, tam_9, tam_10, tam_11, tam_12, tam_13, tam_14, tam_15, tam_16, tam_17];
-    // console.log(tamArr);
-    loadChart(alcohol, cigarat, alcohol_cigarat, "chart1")
-    tamChart(tamArr)
+    let findData = function () {
+        console.log(this.value);
+        table.search(this.value).draw();
+    }
+    document.getElementById("tam").addEventListener("change", findData);
 }
 
 let findData = () => {
@@ -326,26 +199,17 @@ let findData = () => {
     showData(datFilter)
 }
 
-let loadChart = (alcohol, cigarat, alcohol_cigarat, div) => {
+// chart.dispose();
+let loadChart = (data) => {
     am4core.useTheme(am4themes_animated);
-    var chart = am4core.create(div, am4charts.XYChart);
-
-    chart.data = [{
-        country: "สุรา",
-        value: alcohol
-    }, {
-        country: "บุหรี่",
-        value: cigarat
-    }, {
-        country: "สุราและบุหรี่",
-        value: alcohol_cigarat
-    }];
+    var chart = am4core.create("chart1", am4charts.XYChart);
+    chart.data = data;
 
     chart.padding(40, 40, 40, 40);
 
     var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.renderer.grid.template.location = 0;
-    categoryAxis.dataFields.category = "country";
+    categoryAxis.dataFields.category = "type";
     categoryAxis.renderer.minGridDistance = 60;
     categoryAxis.renderer.inversed = true;
     categoryAxis.renderer.grid.template.disabled = true;
@@ -359,7 +223,7 @@ let loadChart = (alcohol, cigarat, alcohol_cigarat, div) => {
     //valueAxis.rangeChangeDuration = 1500;
 
     var series = chart.series.push(new am4charts.ColumnSeries());
-    series.dataFields.categoryX = "country";
+    series.dataFields.categoryX = "type";
     series.dataFields.valueY = "value";
     series.tooltipText = "{valueY.value}"
     series.columns.template.strokeOpacity = 0;
@@ -374,7 +238,6 @@ let loadChart = (alcohol, cigarat, alcohol_cigarat, div) => {
 
     chart.zoomOutButton.disabled = true;
 
-    // as by default columns of the same series are of the same color, we add adapter which takes colors from chart.colors color set
     series.columns.template.adapter.add("fill", function (fill, target) {
         return chart.colors.getIndex(target.dataItem.index);
     });
@@ -420,10 +283,10 @@ let tamChart = (tamArr) => {
     }
 
     chart.cursor = new am4charts.XYCursor();
-
-    createSeries("alcohol", "สุรา");
     createSeries("cigarat", "บุหรี่");
-    createSeries("alcohol_cigarat", "สุราและบุหรี่");
+    createSeries("alcohol", "สุรา");
+    createSeries("alcohol_cigarat", "บุหรี่และสุรา");
+
 }
 
 let editData = (gid) => {
@@ -431,6 +294,6 @@ let editData = (gid) => {
 }
 
 loadData()
-document.getElementById("tam").addEventListener("change", findData);
+
 
 
