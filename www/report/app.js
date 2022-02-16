@@ -122,11 +122,22 @@ let showMap = async (arr) => {
 }
 
 let groupTam = (data) => {
-    var result = _(data)
-        .groupBy('tname')
-        .map((items, name) => ({ name, count: items.length }))
-    // .value();
-    console.log(result);
+    let tam = [{ tname: 'ท่าอิฐ' }, { tname: 'ท่าเสา' }, { tname: 'บ้านเกาะ' }, { tname: 'ป่าเซ่า' }, { tname: 'คุ้งตะเภา' }, { tname: 'วังกะพี้' }, { tname: 'หาดกรวด' }, { tname: 'น้ำริด' }, { tname: 'งิ้วงาม' }, { tname: 'ด่านนาขาม' }, { tname: 'บ้านด่าน' }, { tname: 'ผาจุก' }, { tname: 'วังดิน' }, { tname: 'แสนตอ' }, { tname: 'หาดงิ้ว' }, { tname: 'ขุนฝาง' }, { tname: 'ถ้ำฉลอง' }];
+
+    let ciga = data.filter(x => x.product_type == "บุหรี่" || x.product_type == "บุหรี")
+    var cigat = _(ciga).groupBy('tname').map((i, name) => ({ tname: name, cigcaCnt: i.length })).value();
+
+    let alcohol = data.filter(x => x.product_type == "สุรา" || x.product_type == "เหล้า")
+    var alcoholt = _(alcohol).groupBy('tname').map((i, name) => ({ tname: name, alcoCnt: i.length })).value();
+
+    let both = data.filter(x => x.product_type == "บุหรี่และสุรา" || x.product_type == "เหล้าและบุหรี่")
+    var botht = _(both).groupBy('tname').map((i, name) => ({ tname: name, bothCnt: i.length })).value();
+
+
+    const a3 = tam.map(t1 => ({ ...t1, ...cigat.find(t2 => t2.tname === t1.tname) }))
+    const a4 = a3.map(t1 => ({ ...t1, ...alcoholt.find(t2 => t2.tname === t1.tname) }))
+    const a5 = a4.map(t1 => ({ ...t1, ...botht.find(t2 => t2.tname === t1.tname) }))
+
 }
 
 let showData = async () => {
