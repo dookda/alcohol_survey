@@ -76,7 +76,7 @@ let loadData = () => {
     xdata.then(async (r) => {
         // console.log(r);
 
-        showMap(r.data.data)
+
         datArr.push(r.data.data)
         showData(r.data.data)
     })
@@ -121,8 +121,38 @@ let showMap = async (arr) => {
     console.log(arr);
 }
 
-let showData = async (objArr) => {
-    let alcohol = 0;
+let groupTam = (data) => {
+    var result = _(data)
+        .groupBy('tname')
+        .map((items, name) => ({ name, count: items.length }))
+    // .value();
+    console.log(result);
+}
+
+let showData = async () => {
+    let table = $('#example').DataTable({
+        ajax: {
+            url: 'http://localhost:4000/alcohol-api/getdata',
+            dataSrc: 'data',
+            cache: true,
+        },
+        columns: [
+            { data: 'gid' },
+            { data: 'pid' },
+            { data: 'txt' }
+        ],
+        responsive: true
+    });
+
+    table.on('search.dt', () => {
+        let data = table.rows({ search: 'applied' }).data();
+        // console.log(data);
+        showMap(data)
+        groupTam(data)
+    });
+}
+
+let showData2 = async (objArr) => {
     let cigarat = 0;
     let alcohol_cigarat = 0;
 
@@ -146,7 +176,7 @@ let showData = async (objArr) => {
 
     document.getElementById("total").innerHTML = `จำนวนข้อมูลที่สำรวจ<br><span class="badge badge-success f-24"><b>${objArr.length}</b></span> แห่ง`
     // console.log(objArr);
-    objArr.forEach((x) => {
+    objArr.map((x) => {
         let img;
         // if (x.product_type == "บุหรี่" || x.product_type == "บุหรี") {
         //     img = "cigarettes.png";
@@ -163,91 +193,93 @@ let showData = async (objArr) => {
         //     alcohol_cigarat += 1
         // }
 
-        if (x.tname == "ท่าอิฐ") {
-            x.product_type == "บุหรี่" ? tam_1.alcohol += 1 : null
-            x.product_type == "สุรา" ? tam_1.cigarat += 1 : null
-            x.product_type == "บุหรี่และสุรา" ? tam_1.alcohol_cigarat += 1 : null
-        }
-        if (x.tname == "ท่าเสา") {
-            x.product_type == "บุหรี่" ? tam_2.alcohol += 1 : null
-            x.product_type == "สุรา" ? tam_2.cigarat += 1 : null
-            x.product_type == "บุหรี่และสุรา" ? tam_2.alcohol_cigarat += 1 : null
-        }
-        if (x.tname == "บ้านเกาะ") {
-            x.product_type == "บุหรี่" ? tam_3.alcohol += 1 : null
-            x.product_type == "สุรา" ? tam_3.cigarat += 1 : null
-            x.product_type == "บุหรี่และสุรา" ? tam_3.alcohol_cigarat += 1 : null
-        }
-        if (x.tname == "ป่าเซ่า") {
-            x.product_type == "บุหรี่" ? tam_4.alcohol += 1 : null
-            x.product_type == "สุรา" ? tam_4.cigarat += 1 : null
-            x.product_type == "บุหรี่และสุรา" ? tam_4.alcohol_cigarat += 1 : null
-        }
-        if (x.tname == "คุ้งตะเภา") {
-            x.product_type == "บุหรี่" ? tam_5.alcohol += 1 : null
-            x.product_type == "สุรา" ? tam_5.cigarat += 1 : null
-            x.product_type == "บุหรี่และสุรา" ? tam_5.alcohol_cigarat += 1 : null
-        }
-        if (x.tname == "วังกะพี้") {
-            x.product_type == "บุหรี่" ? tam_6.alcohol += 1 : null
-            x.product_type == "สุรา" ? tam_6.cigarat += 1 : null
-            x.product_type == "บุหรี่และสุรา" ? tam_6.alcohol_cigarat += 1 : null
-        }
-        if (x.tname == "หาดกรวด") {
-            x.product_type == "บุหรี่" ? tam_7.alcohol += 1 : null
-            x.product_type == "สุรา" ? tam_7.cigarat += 1 : null
-            x.product_type == "บุหรี่และสุรา" ? tam_7.alcohol_cigarat += 1 : null
-        }
-        if (x.tname == "น้ำริด") {
-            x.product_type == "บุหรี่" ? tam_8.alcohol += 1 : null
-            x.product_type == "สุรา" ? tam_8.cigarat += 1 : null
-            x.product_type == "บุหรี่และสุรา" ? tam_8.alcohol_cigarat += 1 : null
-        }
-        if (x.tname == "งิ้วงาม") {
-            x.product_type == "บุหรี่" ? tam_9.alcohol += 1 : null
-            x.product_type == "สุรา" ? tam_9.cigarat += 1 : null
-            x.product_type == "บุหรี่และสุรา" ? tam_9.alcohol_cigarat += 1 : null
-        }
-        if (x.tname == "ด่านนาขาม") {
-            x.product_type == "บุหรี่" ? tam_10.alcohol += 1 : null
-            x.product_type == "สุรา" ? tam_10.cigarat += 1 : null
-            x.product_type == "บุหรี่และสุรา" ? tam_10.alcohol_cigarat += 1 : null
-        }
-        if (x.tname == "บ้านด่าน") {
-            x.product_type == "บุหรี่" ? tam_11.alcohol += 1 : null
-            x.product_type == "สุรา" ? tam_11.cigarat += 1 : null
-            x.product_type == "บุหรี่และสุรา" ? tam_11.alcohol_cigarat += 1 : null
-        }
-        if (x.tname == "ผาจุก") {
-            x.product_type == "บุหรี่" ? tam_12.alcohol += 1 : null
-            x.product_type == "สุรา" ? tam_12.cigarat += 1 : null
-            x.product_type == "บุหรี่และสุรา" ? tam_12.alcohol_cigarat += 1 : null
-        }
-        if (x.tname == "วังดิน") {
-            x.product_type == "บุหรี่" ? tam_13.alcohol += 1 : null
-            x.product_type == "สุรา" ? tam_13.cigarat += 1 : null
-            x.product_type == "บุหรี่และสุรา" ? tam_13.alcohol_cigarat += 1 : null
-        }
-        if (x.tname == "แสนตอ") {
-            x.product_type == "บุหรี่" ? tam_14.alcohol += 1 : null
-            x.product_type == "สุรา" ? tam_14.cigarat += 1 : null
-            x.product_type == "บุหรี่และสุรา" ? tam_14.alcohol_cigarat += 1 : null
-        }
-        if (x.tname == "หาดงิ้ว") {
-            x.product_type == "บุหรี่" ? tam_15.alcohol += 1 : null
-            x.product_type == "สุรา" ? tam_15.cigarat += 1 : null
-            x.product_type == "บุหรี่และสุรา" ? tam_15.alcohol_cigarat += 1 : null
-        }
-        if (x.tname == "ขุนฝาง") {
-            x.product_type == "บุหรี่" ? tam_16.alcohol += 1 : null
-            x.product_type == "สุรา" ? tam_16.cigarat += 1 : null
-            x.product_type == "บุหรี่และสุรา" ? tam_16.alcohol_cigarat += 1 : null
-        }
-        if (x.tname == "ถ้ำฉลอง") {
-            x.product_type == "บุหรี่" ? tam_17.alcohol += 1 : null
-            x.product_type == "สุรา" ? tam_17.cigarat += 1 : null
-            x.product_type == "บุหรี่และสุรา" ? tam_17.alcohol_cigarat += 1 : null
-        }
+        console.log(x);
+
+        // if (x.tname == "ท่าอิฐ") {
+        //     x.product_type == "บุหรี่" ? tam_1.alcohol += 1 : null
+        //     x.product_type == "สุรา" ? tam_1.cigarat += 1 : null
+        //     x.product_type == "บุหรี่และสุรา" ? tam_1.alcohol_cigarat += 1 : null
+        // }
+        // if (x.tname == "ท่าเสา") {
+        //     x.product_type == "บุหรี่" ? tam_2.alcohol += 1 : null
+        //     x.product_type == "สุรา" ? tam_2.cigarat += 1 : null
+        //     x.product_type == "บุหรี่และสุรา" ? tam_2.alcohol_cigarat += 1 : null
+        // }
+        // if (x.tname == "บ้านเกาะ") {
+        //     x.product_type == "บุหรี่" ? tam_3.alcohol += 1 : null
+        //     x.product_type == "สุรา" ? tam_3.cigarat += 1 : null
+        //     x.product_type == "บุหรี่และสุรา" ? tam_3.alcohol_cigarat += 1 : null
+        // }
+        // if (x.tname == "ป่าเซ่า") {
+        //     x.product_type == "บุหรี่" ? tam_4.alcohol += 1 : null
+        //     x.product_type == "สุรา" ? tam_4.cigarat += 1 : null
+        //     x.product_type == "บุหรี่และสุรา" ? tam_4.alcohol_cigarat += 1 : null
+        // }
+        // if (x.tname == "คุ้งตะเภา") {
+        //     x.product_type == "บุหรี่" ? tam_5.alcohol += 1 : null
+        //     x.product_type == "สุรา" ? tam_5.cigarat += 1 : null
+        //     x.product_type == "บุหรี่และสุรา" ? tam_5.alcohol_cigarat += 1 : null
+        // }
+        // if (x.tname == "วังกะพี้") {
+        //     x.product_type == "บุหรี่" ? tam_6.alcohol += 1 : null
+        //     x.product_type == "สุรา" ? tam_6.cigarat += 1 : null
+        //     x.product_type == "บุหรี่และสุรา" ? tam_6.alcohol_cigarat += 1 : null
+        // }
+        // if (x.tname == "หาดกรวด") {
+        //     x.product_type == "บุหรี่" ? tam_7.alcohol += 1 : null
+        //     x.product_type == "สุรา" ? tam_7.cigarat += 1 : null
+        //     x.product_type == "บุหรี่และสุรา" ? tam_7.alcohol_cigarat += 1 : null
+        // }
+        // if (x.tname == "น้ำริด") {
+        //     x.product_type == "บุหรี่" ? tam_8.alcohol += 1 : null
+        //     x.product_type == "สุรา" ? tam_8.cigarat += 1 : null
+        //     x.product_type == "บุหรี่และสุรา" ? tam_8.alcohol_cigarat += 1 : null
+        // }
+        // if (x.tname == "งิ้วงาม") {
+        //     x.product_type == "บุหรี่" ? tam_9.alcohol += 1 : null
+        //     x.product_type == "สุรา" ? tam_9.cigarat += 1 : null
+        //     x.product_type == "บุหรี่และสุรา" ? tam_9.alcohol_cigarat += 1 : null
+        // }
+        // if (x.tname == "ด่านนาขาม") {
+        //     x.product_type == "บุหรี่" ? tam_10.alcohol += 1 : null
+        //     x.product_type == "สุรา" ? tam_10.cigarat += 1 : null
+        //     x.product_type == "บุหรี่และสุรา" ? tam_10.alcohol_cigarat += 1 : null
+        // }
+        // if (x.tname == "บ้านด่าน") {
+        //     x.product_type == "บุหรี่" ? tam_11.alcohol += 1 : null
+        //     x.product_type == "สุรา" ? tam_11.cigarat += 1 : null
+        //     x.product_type == "บุหรี่และสุรา" ? tam_11.alcohol_cigarat += 1 : null
+        // }
+        // if (x.tname == "ผาจุก") {
+        //     x.product_type == "บุหรี่" ? tam_12.alcohol += 1 : null
+        //     x.product_type == "สุรา" ? tam_12.cigarat += 1 : null
+        //     x.product_type == "บุหรี่และสุรา" ? tam_12.alcohol_cigarat += 1 : null
+        // }
+        // if (x.tname == "วังดิน") {
+        //     x.product_type == "บุหรี่" ? tam_13.alcohol += 1 : null
+        //     x.product_type == "สุรา" ? tam_13.cigarat += 1 : null
+        //     x.product_type == "บุหรี่และสุรา" ? tam_13.alcohol_cigarat += 1 : null
+        // }
+        // if (x.tname == "แสนตอ") {
+        //     x.product_type == "บุหรี่" ? tam_14.alcohol += 1 : null
+        //     x.product_type == "สุรา" ? tam_14.cigarat += 1 : null
+        //     x.product_type == "บุหรี่และสุรา" ? tam_14.alcohol_cigarat += 1 : null
+        // }
+        // if (x.tname == "หาดงิ้ว") {
+        //     x.product_type == "บุหรี่" ? tam_15.alcohol += 1 : null
+        //     x.product_type == "สุรา" ? tam_15.cigarat += 1 : null
+        //     x.product_type == "บุหรี่และสุรา" ? tam_15.alcohol_cigarat += 1 : null
+        // }
+        // if (x.tname == "ขุนฝาง") {
+        //     x.product_type == "บุหรี่" ? tam_16.alcohol += 1 : null
+        //     x.product_type == "สุรา" ? tam_16.cigarat += 1 : null
+        //     x.product_type == "บุหรี่และสุรา" ? tam_16.alcohol_cigarat += 1 : null
+        // }
+        // if (x.tname == "ถ้ำฉลอง") {
+        //     x.product_type == "บุหรี่" ? tam_17.alcohol += 1 : null
+        //     x.product_type == "สุรา" ? tam_17.cigarat += 1 : null
+        //     x.product_type == "บุหรี่และสุรา" ? tam_17.alcohol_cigarat += 1 : null
+        // }
 
 
 
