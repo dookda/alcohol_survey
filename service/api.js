@@ -27,7 +27,7 @@ app.get("/alcohol-api/getdata", (req, res) => {
             certification, addresses, retail_status, alcohol_survey, alcohol, 
             alcohol_item, cigarette_survey, cigarette, cigarette_item,lat,lng,tname,aname,
             TO_CHAR(ts, 'DD-MM-YYYY') as ndate, ST_AsGeojson(geom) as geojson  
-        FROM back15022022 ORDER BY ts DESC`;
+        FROM ud_alcohol_data ORDER BY ts DESC`;
     // console.log(sql);
     db.query(sql).then(r => {
         res.status(200).json({
@@ -115,7 +115,7 @@ app.post("/alcohol-api/update", async (req, res) => {
 app.post("/alcohol-api/delete", (req, res) => {
     const { gid } = req.body;
     // console.log(gid);
-    const sql = `DELETE FROM back15022022 WHERE gid=${gid}`;
+    const sql = `DELETE FROM ud_alcohol_data WHERE gid=${gid}`;
     console.log(sql);
     db.query(sql).then(r => {
         res.status(200).json({
