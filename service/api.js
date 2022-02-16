@@ -27,7 +27,25 @@ app.get("/alcohol-api/getdata", (req, res) => {
             certification, addresses, retail_status, alcohol_survey, alcohol, 
             alcohol_item, cigarette_survey, cigarette, cigarette_item,lat,lng,tname,
             TO_CHAR(ts, 'DD-MM-YYYY') as ndate, ST_AsGeojson(geom) as geojson  
-        FROM v_ud_alcohol ORDER BY ts DESC`;
+        FROM ud_alcohol_data ORDER BY ts DESC`;
+    // console.log(sql);
+    db.query(sql).then(r => {
+        res.status(200).json({
+            data: r.rows
+        })
+    })
+})
+
+
+app.get("/alcohol-api/getdatabytam", (req, res) => {
+    // const { usrid } = req.body;
+
+    const sql = `SELECT gid, pid, CONCAT(retail_name, owner_name, addresses, retail_type, product_type) as txt,
+            retail_name, owner_name, retail_type, product_type, 
+            certification, addresses, retail_status, alcohol_survey, alcohol, 
+            alcohol_item, cigarette_survey, cigarette, cigarette_item,lat,lng,tname,
+            TO_CHAR(ts, 'DD-MM-YYYY') as ndate, ST_AsGeojson(geom) as geojson  
+        FROM ud_alcohol_data ORDER BY ts DESC`;
     // console.log(sql);
     db.query(sql).then(r => {
         res.status(200).json({
