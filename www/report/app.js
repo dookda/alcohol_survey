@@ -10,7 +10,7 @@ document.getElementById("chartdiv2").innerHTML = `<div class="spinner-border" ro
         <span class="sr-only">Loading...</span> </div>`
 
 let map = L.map('map', {
-    center: [17.720, 100.050],
+    center: [17.720, 100.200],
     zoom: 10,
     scrollWheelZoom: false
 });
@@ -190,7 +190,7 @@ let showData = async () => {
             "sZeroRecords": "ไม่พบข้อมูล",
             "sInfo": "แสดง _START_ ถึง _END_ จาก _TOTAL_ แถว",
             "sInfoEmpty": "แสดง 0 ถึง 0 จาก 0 แถว",
-            "sInfoFiltered": "(กรองข้อมูล _MAX_ ทุกแถว)",
+            "sInfoFiltered": "(ทั้งหมด _MAX_ แถว)",
             "sInfoPostFix": "",
             "sSearch": "ค้นหา:",
             "sUrl": "",
@@ -231,7 +231,8 @@ let showData = async () => {
         buttons: [
             'excel', 'print'
         ],
-        responsive: true
+        responsive: true,
+        scrollX: true
     });
 
     table.on('search.dt', () => {
