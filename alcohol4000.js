@@ -3,11 +3,11 @@ var fs = require('fs');
 const express = require('express');
 const app = express();
 
-var https_options = {
-    key: fs.readFileSync("/etc/apache2/ssl/private.key"),
-    cert: fs.readFileSync("/etc/apache2/ssl/public.crt"),
-    ca: fs.readFileSync('/etc/apache2/ssl/intermediate.crt')
-};
+// var https_options = {
+//     key: fs.readFileSync("/etc/apache2/ssl/private.key"),
+//     cert: fs.readFileSync("/etc/apache2/ssl/public.crt"),
+//     ca: fs.readFileSync('/etc/apache2/ssl/intermediate.crt')
+// };
 
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -29,10 +29,10 @@ app.use(api);
 
 app.use('/', express.static('www'))
 
-var server = https.createServer(https_options, app);
+// var server = https.createServer(https_options, app);
 var port = process.env.PORT || 4000;
 server.listen(port, function () {
-    console.log('listening on port ' + server.address().port);
+    console.log('listening on port ' + port);
 });
 
 //app.listen(3100, () => {
