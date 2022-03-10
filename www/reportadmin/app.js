@@ -70,21 +70,21 @@ const ghyb = L.tileLayer('https://{s}.google.com/vt/lyrs=y,m&x={x}&y={y}&z={z}',
     subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
 });
 
-var prov = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
+var prov = L.tileLayer.wms("https://rti2dss.com/geoserver/th/wms?", {
     layers: 'th:province_4326',
     format: 'image/png',
     transparent: true,
     CQL_FILTER: 'pro_code=53'
 });
 
-var amp = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
+var amp = L.tileLayer.wms("https://rti2dss.com/geoserver/th/wms?", {
     layers: 'th:amphoe_4326',
     format: 'image/png',
     transparent: true,
     CQL_FILTER: 'pro_code=53'
 });
 
-var tam = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
+var tam = L.tileLayer.wms("https://rti2dss.com/geoserver/th/wms?", {
     layers: 'th:tambon_4326',
     format: 'image/png',
     transparent: true,
@@ -254,12 +254,15 @@ let showData = async () => {
                 data: null,
                 render: function (data, type, row, meta) {
                     const json = JSON.parse(data.geojson);
-
-                    return `
-                    <button onclick="zoomMap(${json.coordinates[0]},${json.coordinates[1]},'${data.retail_name}','${data.owner_name}','${data.retail_type}')" class="btn btn-margin btn-success" ><i class="bi bi-map"></i> ซูม</button>
-                    <button onclick="editData(${data.gid})" class="btn btn-margin btn-warning" ><i class="bi bi-clipboard-data"></i> แก้ไข</button>
-                    <button onclick="deleteData(${data.gid})" class="btn btn-margin btn-danger" ><i class="bi bi-clipboard-x"></i> ลบ</button>
-                    `
+                    if (json !== null) {
+                        return `
+                            <button onclick="zoomMap(${json.coordinates[0]},${json.coordinates[1]},'${data.retail_name}','${data.owner_name}','${data.retail_type}')" class="btn btn-margin btn-success" ><i class="bi bi-map"></i> ซูม</button>
+                            <button onclick="editData(${data.gid})" class="btn btn-margin btn-warning" ><i class="bi bi-clipboard-data"></i> แก้ไข</button>
+                            <button onclick="deleteData(${data.gid})" class="btn btn-margin btn-danger" ><i class="bi bi-clipboard-x"></i> ลบ</button>
+                        `
+                    } else {
+                        return ''
+                    }
                 },
             },
         ],

@@ -53,7 +53,7 @@ const ghyb = L.tileLayer('https://{s}.google.com/vt/lyrs=y,m&x={x}&y={y}&z={z}',
     subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
 });
 
-var prov = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
+var prov = L.tileLayer.wms("https://rti2dss.com/geoserver/th/wms?", {
     layers: 'th:province_4326',
     format: 'image/png',
     transparent: true
