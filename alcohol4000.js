@@ -31,7 +31,7 @@ app.use('/', express.static('www'))
 
 // var server = https.createServer(https_options, app);
 var port = process.env.PORT || 4000;
-server.listen(port, function () {
+app.listen(port, function () {
     console.log('listening on port ' + port);
 });
 
