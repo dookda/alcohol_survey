@@ -35,7 +35,7 @@ let gotoDashboard = () => {
 initializeLiff()
 
 
-var url = 'https://rti2dss.com:4000';
+var url = 'https://rti2dss.com/p4000';
 // var url = 'http://localhost:4000';
 
 document.getElementById("total").innerHTML = `<div class="spinner-border" role="status">

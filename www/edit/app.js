@@ -23,7 +23,7 @@ async function getUserid() {
 
 // initializeLiff()
 
-var url = 'https://rti2dss.com:4000';
+var url = 'https://rti2dss.com/p4000';
 // var url = 'http://localhost:4000';
 
 var gid = location.search.split('gid=')[1];
