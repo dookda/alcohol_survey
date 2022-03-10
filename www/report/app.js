@@ -204,7 +204,7 @@ let showData = async () => {
     });
     let table = $('#example').DataTable({
         ajax: {
-            url: '/alcohol-api/getdata',
+            url: url + '/alcohol-api/getdata',
             dataSrc: 'data',
             cache: true,
         },
