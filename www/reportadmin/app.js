@@ -23,7 +23,7 @@ async function getUserid() {
 }
 
 let chkAdmin = (usrid) => {
-    axios.post(url + '/alcohol-api/getuser', { usrid }).then((r) => {
+    axios.post('/alcohol-api/getuser', { usrid }).then((r) => {
         r.data.data[0].usertype == 'admin' ? loadData() : $("#modal").modal("show");
     })
 }
@@ -105,7 +105,7 @@ var overlayMap = {
 
 L.control.layers(baseMap, overlayMap).addTo(map);
 
-let xdata = axios.get(url + '/alcohol-api/getdata')
+let xdata = axios.get('/alcohol-api/getdata')
 let datArr = []
 let loadData = () => {
     datArr = []
@@ -240,7 +240,7 @@ let showData = async () => {
     });
     let table = $('#example').DataTable({
         ajax: {
-            url: url + '/alcohol-api/getdata',
+            url: '/alcohol-api/getdata',
             dataSrc: 'data',
             cache: true,
         },

@@ -183,7 +183,7 @@ let saveData = () => {
     }
     console.log(obj);
 
-    axios.post(url + '/alcohol-api/insert', obj).then((res) => {
+    axios.post('/alcohol-api/insert', obj).then((res) => {
         // editData()
         $("#ex5").modal({
             escapeClose: false,

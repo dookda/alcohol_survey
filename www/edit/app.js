@@ -203,7 +203,7 @@ let saveData = () => {
 
     // console.log(obj);
 
-    axios.post(url + '/alcohol-api/update', obj).then((res) => {
+    axios.post('/alcohol-api/update', obj).then((res) => {
         gotoReport()
     })
 };

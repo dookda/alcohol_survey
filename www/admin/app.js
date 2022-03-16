@@ -23,7 +23,7 @@ async function getUserid() {
 }
 
 let chkAdmin = (usrid) => {
-    axios.post(url + '/alcohol-api/getuser', { usrid }).then((r) => {
+    axios.post('/alcohol-api/getuser', { usrid }).then((r) => {
         r.data.data[0].usertype == 'admin' ? loadData() : $("#modal").modal("show");
     })
 }
@@ -38,7 +38,7 @@ var url = 'http://localhost:4000'
 // var url = 'http://localhost:4000'
 
 let loadData = () => {
-    axios.post(url + '/alcohol-api/getalluser', { usrid: 'usrid' }).then((r) => {
+    axios.post('/alcohol-api/getalluser', { usrid: 'usrid' }).then((r) => {
         r.data.data.map(x => {
             document.getElementById("content").innerHTML += `<div class="inner-box mt-2" >
                 <div class="content" >
@@ -61,21 +61,21 @@ let loadData = () => {
 }
 
 let deleteUser = (usrid) => {
-    axios.post(url + '/alcohol-api/deleteuser', { usrid }).then(r => {
+    axios.post('/alcohol-api/deleteuser', { usrid }).then(r => {
         document.getElementById("content").innerHTML = "";
         loadData()
     })
 }
 
 let setUser = (usrid, usertype) => {
-    axios.post(url + '/alcohol-api/updateauth', { usrid, usertype: "ผู้ใช้" }).then(r => {
+    axios.post('/alcohol-api/updateauth', { usrid, usertype: "ผู้ใช้" }).then(r => {
         document.getElementById("content").innerHTML = "";
         loadData()
     })
 }
 
 let setAdmin = (usrid, usertype) => {
-    axios.post(url + '/alcohol-api/updateauth', { usrid, usertype: "admin" }).then(r => {
+    axios.post('/alcohol-api/updateauth', { usrid, usertype: "admin" }).then(r => {
         document.getElementById("content").innerHTML = "";
         loadData()
     })
