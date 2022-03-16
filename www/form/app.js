@@ -23,7 +23,7 @@ async function getUserid() {
 
 // initializeLiff()
 
-var url = 'http://203.157.206.37:4000'
+var url = 'http://localhost:4000'
 // var url = 'http://localhost:3000'
 
 let map = L.map('map', {
