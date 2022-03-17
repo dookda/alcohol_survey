@@ -1,0 +1,27 @@
+version: "1"
+services:
+  web:
+    # image: node
+    # command: npm start
+    build: .
+    ports:
+      - "4000:4000"
+    # links:
+    #   - db
+    # working_dir: /src
+    environment:
+      SEQ_DB: alcohol
+      SEQ_USER: postgres
+      SEQ_PW: 1234
+      PORT: 4000
+      # DATABASE_URL: postgres://username:pgpassword@127.0.0.1:5432/mydatabase
+      DATABASE_URL: "postgres://username:pgpassword@db:5432/alcohol"
+    # volumes:
+    #   - ./:/src
+  db:
+    image: postgis/postgis
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
