@@ -1,14 +1,11 @@
 FROM node:17.5.0
-ENV NODE_ENV=production
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY ["package.json", "package-lock.json*", "./"]
+COPY package*.json ./
 
-RUN npm i --production
-
+RUN npm install
 COPY . .
 
 EXPOSE 4000
-
-CMD ["node", "server.js"]
+CMD [ "node", "server.js" ]
