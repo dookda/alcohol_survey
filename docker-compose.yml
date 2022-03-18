@@ -1,27 +1,26 @@
 version: "1"
 services:
-  web:
-    # image: node
-    # command: npm start
+  app:
     build: .
+    depends_on:
+      - postgres
     ports:
       - "4000:4000"
-    # links:
-    #   - db
-    # working_dir: /src
-    environment:
-      SEQ_DB: alcohol
-      SEQ_USER: postgres
-      SEQ_PW: 1234
-      PORT: 4000
-      # DATABASE_URL: postgres://username:pgpassword@127.0.0.1:5432/mydatabase
-      DATABASE_URL: "postgres://username:pgpassword@db:5432/alcohol"
-    # volumes:
-    #   - ./:/src
+    volumes:
+      - ./:/usr/src/app/
+
   db:
     image: postgis/postgis
-    ports:
-      - "5432:5432"
+    restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1234
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=alcohol
+    ports:
+      # Standard port for PostgreSQL databases
+      - "5432:5432"
+    volumes:
+      # When the PostgresSQL container is started it will run any scripts
+      # provided in the `docker-entrypoint-initdb.d` directory, this connects
+      # our seed file to that directory so that it gets run
+      - ./database-seed.sql:/docker-entrypoint-initdb.d/database-seed.sql
