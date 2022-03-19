@@ -12,11 +12,11 @@ function initializeLiff() {
     });
 }
 
-var url = 'http://localhost:4000'
+// var url = 'http://localhost:4000'
 // var url = 'http://localhost:4000'
 
 let getData = (usrid) => {
-    axios.post(url + "/alcohol-api/getuser", { usrid }).then((r) => {
+    axios.post("/alcohol-api/getuser", { usrid }).then((r) => {
         console.log(r);
         if (r.data.data.length > 0) {
             document.getElementById("username").value = r.data.data[0].username;
@@ -35,7 +35,7 @@ let insertUser = () => {
     let username = document.getElementById("username").value;
     let agency = document.getElementById("agency").value;
     let linename = document.getElementById("displayName").value;
-    axios.post(url + "/alcohol-api/insertuser", { usrid, username, agency, linename }).then((r) => {
+    axios.post("/alcohol-api/insertuser", { usrid, username, agency, linename }).then((r) => {
         getData(usrid)
     })
 }
@@ -44,7 +44,7 @@ let updateUser = () => {
     let usrid = document.getElementById("usrid").value;
     let username = document.getElementById("username").value;
     let agency = document.getElementById("agency").value;
-    axios.post(url + "/alcohol-api/updateuser", { usrid, username, agency }).then((r) => {
+    axios.post("/alcohol-api/updateuser", { usrid, username, agency }).then((r) => {
         getData(usrid)
     })
 }

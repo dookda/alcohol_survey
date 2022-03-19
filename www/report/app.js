@@ -1,5 +1,5 @@
 
-var url = 'http://localhost:4000'
+// var url = 'http://localhost:4000'
 // var url = 'http://localhost:4000';
 
 document.getElementById("total").innerHTML = `<div class="spinner-border" role="status">

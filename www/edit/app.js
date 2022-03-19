@@ -23,7 +23,7 @@ async function getUserid() {
 
 // initializeLiff()
 
-var url = 'http://localhost:4000'
+// var url = 'http://localhost:4000'
 // var url = 'http://localhost:4000';
 
 var gid = location.search.split('gid=')[1];
@@ -93,7 +93,7 @@ map.on('click', (e) => {
 });
 
 let getData = (gid) => {
-    axios.post(url + "/alcohol-api/getselectdata", { gid }).then(r => {
+    axios.post("/alcohol-api/getselectdata", { gid }).then(r => {
         r.data.data[0].alcohol == "true" ? document.getElementById("alcoholyes").checked = true : document.getElementById("alcoholno").checked = true;
         r.data.data[0].cigarette == "true" ? document.getElementById("cigaretteyes").checked = true : document.getElementById("cigaretteyno").checked = true;
 

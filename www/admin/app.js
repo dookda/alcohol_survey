@@ -34,7 +34,7 @@ let gotoDashboard = () => {
 
 initializeLiff()
 
-var url = 'http://localhost:4000'
+// var url = 'http://localhost:4000'
 // var url = 'http://localhost:4000'
 
 let loadData = () => {
