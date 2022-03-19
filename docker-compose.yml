@@ -1,4 +1,4 @@
-version: "1"
+version: "3.3"
 services:
   app:
     build: .
@@ -6,10 +6,10 @@ services:
       - postgres
     ports:
       - "4000:4000"
-    volumes:
-      - ./:/usr/src/app/
+    # volumes:
+    #   - ./:/usr/src/app/
 
-  db:
+  postgres:
     image: postgis/postgis
     restart: always
     environment:
@@ -23,4 +23,4 @@ services:
       # When the PostgresSQL container is started it will run any scripts
       # provided in the `docker-entrypoint-initdb.d` directory, this connects
       # our seed file to that directory so that it gets run
-      - ./database-seed.sql:/docker-entrypoint-initdb.d/database-seed.sql
+      - ./alcohol.sql:/docker-entrypoint-initdb.d/alcohol.sql
