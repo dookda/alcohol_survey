@@ -14,11 +14,11 @@ services:
     restart: always
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=1234
+      - POSTGRES_PASSWORD=Uto@00574
       - POSTGRES_DB=alcohol
     ports:
       # Standard port for PostgreSQL databases
-      - "5432:5432"
+      - "5433:5433"
     volumes:
       # When the PostgresSQL container is started it will run any scripts
       # provided in the `docker-entrypoint-initdb.d` directory, this connects
