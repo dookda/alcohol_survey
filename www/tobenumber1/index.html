@@ -99,7 +99,42 @@
             <div class="auto-container">
                 <div class="content-column col-lg-12">
                     <div class="inner-column wow fadeInUp">
-                        <input type="hidden" id="usrid">
+                        <div class="default-form">
+                            <div class="form-group col-lg-12 col-md-12">
+                                <label for="">ค้นจากตำบล</label>
+                                <select class="select" id="hname">
+                                    <option value="9999">ทุกตำบล</option>
+                                    <!-- <option value="6251">โรงพยาบาลส่งเสริมสุขภาพตำบลม่อนดินแดง ตำบลท่าเสา</option>
+                                    <option value="6252">โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านเกาะ</option>
+                                    <option value="6253">โรงพยาบาลส่งเสริมสุขภาพตำบลป่าเซ่า</option>
+                                    <option value="6254">โรงพยาบาลส่งเสริมสุขภาพตำบลคุ้งตะเภา</option>
+                                    <option value="6255">โรงพยาบาลส่งเสริมสุขภาพตำบลวังกะพี้</option>
+                                    <option value="6256">โรงพยาบาลส่งเสริมสุขภาพตำบลหาดกรวด</option>
+                                    <option value="6257">โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านท่า ตำบลหาดกรวด</option>
+                                    <option value="6258">โรงพยาบาลส่งเสริมสุขภาพตำบลน้ำริด</option>
+                                    <option value="6259">โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านชายเขา ตำบลน้ำริด</option>
+                                    <option value="6260">โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านวังสีสูบ </option>
+                                    <option value="6261">สถานีอนามัยเฉลิมพระเกียรติ 60 พรรษา นวมินทราชินี </option>
+                                    <option value="6262">โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านด่านนาขาม</option>
+                                    <option value="6263">โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านห้วยฮ้า ตำบลบ้านด่านนาขาม
+                                    </option>
+                                    <option value="6264">โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านด่าน</option>
+                                    <option value="6265">โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านพระฝาง ตำบลผาจุก</option>
+                                    <option value="6266">โรงพยาบาลส่งเสริมสุขภาพตำบลผาจุก</option>
+                                    <option value="6267">โรงพยาบาลส่งเสริมสุขภาพตำบลวังดิน</option>
+                                    <option value="6268">โรงพยาบาลส่งเสริมสุขภาพตำบลแสนตอ</option>
+                                    <option value="6269">โรงพยาบาลส่งเสริมสุขภาพตำบลหาดงิ้ว</option>
+                                    <option value="6270">โรงพยาบาลส่งเสริมสุขภาพตำบลขุนฝาง</option>
+                                    <option value="6271">โรงพยาบาลส่งเสริมสุขภาพตำบลถ้ำฉลอง</option>
+                                    <option value="10673">โรงพยาบาลอุตรดิตถ์</option>
+                                    <option value="11509">โรงพยาบาลค่ายพิชัยดาบหัก</option>
+                                    <option value="14435">เทศบาลเมืองอุตรดิตถ์</option>
+                                    <option value="22820">สถานพยาบาลเรือนจำจังหวัดอุตรดิตถ์</option> -->
+                                </select>
+                                <!-- <input type="text" id="find" placeholder="กรอกคำค้นหา.." onchange="findData()"> -->
+                            </div>
+                        </div>
+                        <p></p>
 
                         <div class="row">
                             <div class="form-group col-lg-6 col-md-6">
@@ -111,7 +146,6 @@
                                 <div class="bg-white mb-3">
                                     <div class="chartdiv" id="chart1"></div>
                                 </div>
-                                <div id="map"></div>
                             </div>
                             <div class="form-group col-lg-6 col-md-6">
                                 <div class="bg-white">
@@ -120,86 +154,12 @@
                             </div>
                         </div>
 
-                        <div class="default-form">
-                            <div class="form-group col-lg-12 col-md-12">
-                                <label for="">ค้นจากตำบล</label>
-                                <input type="hidden" id="usrid">
-                                <select class="select" id="tam">
-                                    <option value="">ทุกตำบล</option>
-                                    <option value="ท่าอิฐ">ท่าอิฐ</option>
-                                    <option value="ท่าเสา">ท่าเสา</option>
-                                    <option value="บ้านเกาะ">บ้านเกาะ</option>
-                                    <option value="ป่าเซ่า">ป่าเซ่า</option>
-                                    <option value="คุ้งตะเภา">คุ้งตะเภา</option>
-                                    <option value="วังกะพี้">วังกะพี้</option>
-                                    <option value="หาดกรวด">หาดกรวด</option>
-                                    <option value="น้ำริด">น้ำริด</option>
-                                    <option value="งิ้วงาม">งิ้วงาม</option>
-                                    <option value="ด่านนาขาม">ด่านนาขาม</option>
-                                    <option value="บ้านด่าน">บ้านด่าน</option>
-                                    <option value="ผาจุก">ผาจุก</option>
-                                    <option value="วังดิน">วังดิน</option>
-                                    <option value="แสนตอ">แสนตอ</option>
-                                    <option value="หาดงิ้ว">หาดงิ้ว</option>
-                                    <option value="ขุนฝาง">ขุนฝาง</option>
-                                    <option value="ถ้ำฉลอง">ถ้ำฉลอง</option>
-                                </select>
-                                <!-- <input type="text" id="find" placeholder="กรอกคำค้นหา.." onchange="findData()"> -->
-                            </div>
-                        </div>
-                        <p></p>
-
-                        <div class="bg-white">
-                            <table id="example" class="display nowrap" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>id</th>
-                                        <th>ชื่อร้าน</th>
-                                        <th>ประเภท</th>
-                                        <th>เจ้าของร้าน</th>
-                                        <th>ตำบล</th>
-                                        <th>..</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
 
                     </div>
                 </div>
             </div>
         </section>
     </div>
-    <!-- End About Section -->
-
-    <div class="modal" id="deleteModal">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="w3-animate-top"></div>
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">
-                        <i class="bi bi-file-earmark-excel-fill text-danger mr-2" style="font-size: 26px;"></i>
-                        ยืนยันการลบข้อมูล
-                    </h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <!-- Modal body -->
-                <div class="modal-body text-center">
-                    <p style="font-size: 18px;">ท่านต้องการลบข้อมูล
-                        <b> id <span id="gidlabel"></span> </b> ใช่หรือไม่?
-                        <input type="hidden" id="gid">
-                    </p>
-                </div>
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" onclick="deleteValue()">ยืนยัน</button>
-                    <button type="button" class="btn btn-light" onclick="closeModal()">ยกเลิก</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
 
     <!-- Main Footer -->
     <footer class="main-footer alternate">
@@ -261,6 +221,7 @@
 
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script src='https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="./app.js"></script>
 
 </body>

@@ -184,4 +184,42 @@ app.post("/alcohol-api/updateauth", (req, res) => {
     })
 })
 
+app.post("/tobe1/gethname", (req, res) => {
+    const { hospcode } = req.body;
+    let sql;
+    if (hospcode == 9999) {
+        sql = `SELECT distinct hospcode, hosname, count(hosname) 
+        FROM tobe1 
+        WHERE date_part('year',age(now(), birth)) >= 7
+        GROUP BY hospcode, hosname`;
+        console.log(999);
+    } else {
+        sql = `SELECT distinct hospcode, hosname, count(hosname) 
+        FROM tobe1 
+        WHERE hospcode='${hospcode}' AND date_part('year',age(now(), birth)) >= 7
+        GROUP BY hospcode, hosname`
+        console.log(hospcode);
+    }
+
+    db.query(sql).then(r => {
+        res.status(200).json({
+            data: r.rows
+        })
+    })
+})
+
+app.post("/tobe1/getparam", (req, res) => {
+    const { hospcode, colname } = req.body;
+    const sql = `SELECT DISTINCT ${colname}, count(${colname})
+        FROM tobe1 
+        WHERE hospcode='${hospcode}' AND date_part('year',age(now(), birth)) >= 7
+        GROUP BY ${colname}`
+
+    db.query(sql).then(r => {
+        res.status(200).json({
+            data: r.rows
+        })
+    })
+})
+
 module.exports = app;
