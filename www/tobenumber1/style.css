@@ -70,3 +70,13 @@ a {
 .main-menu .navigation>li.current>span {
     color: #000 !important;
 }
+
+img {
+    border-radius: 14px;
+    padding: 5px;
+    width: 150px;
+}
+
+.mt-50 {
+    margin-top: 20px;
+}
