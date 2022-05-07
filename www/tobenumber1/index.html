@@ -102,34 +102,8 @@
                         <div class="default-form">
                             <div class="form-group col-lg-12 col-md-12">
                                 <label for="">ค้นจากตำบล</label>
-                                <select class="select" id="hname">
+                                <select class="select" id="hname" onchange="onHchang()">
                                     <option value="9999">ทุกตำบล</option>
-                                    <!-- <option value="6251">โรงพยาบาลส่งเสริมสุขภาพตำบลม่อนดินแดง ตำบลท่าเสา</option>
-                                    <option value="6252">โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านเกาะ</option>
-                                    <option value="6253">โรงพยาบาลส่งเสริมสุขภาพตำบลป่าเซ่า</option>
-                                    <option value="6254">โรงพยาบาลส่งเสริมสุขภาพตำบลคุ้งตะเภา</option>
-                                    <option value="6255">โรงพยาบาลส่งเสริมสุขภาพตำบลวังกะพี้</option>
-                                    <option value="6256">โรงพยาบาลส่งเสริมสุขภาพตำบลหาดกรวด</option>
-                                    <option value="6257">โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านท่า ตำบลหาดกรวด</option>
-                                    <option value="6258">โรงพยาบาลส่งเสริมสุขภาพตำบลน้ำริด</option>
-                                    <option value="6259">โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านชายเขา ตำบลน้ำริด</option>
-                                    <option value="6260">โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านวังสีสูบ </option>
-                                    <option value="6261">สถานีอนามัยเฉลิมพระเกียรติ 60 พรรษา นวมินทราชินี </option>
-                                    <option value="6262">โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านด่านนาขาม</option>
-                                    <option value="6263">โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านห้วยฮ้า ตำบลบ้านด่านนาขาม
-                                    </option>
-                                    <option value="6264">โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านด่าน</option>
-                                    <option value="6265">โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านพระฝาง ตำบลผาจุก</option>
-                                    <option value="6266">โรงพยาบาลส่งเสริมสุขภาพตำบลผาจุก</option>
-                                    <option value="6267">โรงพยาบาลส่งเสริมสุขภาพตำบลวังดิน</option>
-                                    <option value="6268">โรงพยาบาลส่งเสริมสุขภาพตำบลแสนตอ</option>
-                                    <option value="6269">โรงพยาบาลส่งเสริมสุขภาพตำบลหาดงิ้ว</option>
-                                    <option value="6270">โรงพยาบาลส่งเสริมสุขภาพตำบลขุนฝาง</option>
-                                    <option value="6271">โรงพยาบาลส่งเสริมสุขภาพตำบลถ้ำฉลอง</option>
-                                    <option value="10673">โรงพยาบาลอุตรดิตถ์</option>
-                                    <option value="11509">โรงพยาบาลค่ายพิชัยดาบหัก</option>
-                                    <option value="14435">เทศบาลเมืองอุตรดิตถ์</option>
-                                    <option value="22820">สถานพยาบาลเรือนจำจังหวัดอุตรดิตถ์</option> -->
                                 </select>
                                 <!-- <input type="text" id="find" placeholder="กรอกคำค้นหา.." onchange="findData()"> -->
                             </div>
@@ -149,7 +123,7 @@
                             </div>
                             <div class="form-group col-lg-6 col-md-6">
                                 <div class="bg-white">
-                                    <div class="chartTam" id="chartdiv2"></div>
+                                    <div class="chartTam" id="chart2"></div>
                                 </div>
                             </div>
                         </div>
@@ -197,20 +171,12 @@
     <script src="./../js/wow.js"></script>
     <script src="./../js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
-    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
-    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
 
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/fonts/notosans-sc.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
@@ -219,9 +185,7 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
 
-    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script src='https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js'></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="./app.js"></script>
 
 </body>

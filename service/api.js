@@ -185,20 +185,28 @@ app.post("/alcohol-api/updateauth", (req, res) => {
 })
 
 app.post("/tobe1/gethname", (req, res) => {
+    let sql = `SELECT distinct hospcode, hosname FROM tobe1`;
+
+    db.query(sql).then(r => {
+        res.status(200).json({
+            data: r.rows
+        })
+    })
+})
+
+app.post("/tobe1/gethcount", (req, res) => {
     const { hospcode } = req.body;
     let sql;
-    if (hospcode == 9999) {
-        sql = `SELECT distinct hospcode, hosname, count(hosname) 
+    if (hospcode == '9999') {
+        sql = `SELECT distinct hosname, count(hosname) as count
         FROM tobe1 
         WHERE date_part('year',age(now(), birth)) >= 7
-        GROUP BY hospcode, hosname`;
-        console.log(999);
+        GROUP BY hosname`;
     } else {
-        sql = `SELECT distinct hospcode, hosname, count(hosname) 
+        sql = `SELECT distinct hosname, count(hosname) as count
         FROM tobe1 
         WHERE hospcode='${hospcode}' AND date_part('year',age(now(), birth)) >= 7
-        GROUP BY hospcode, hosname`
-        console.log(hospcode);
+        GROUP BY hosname`
     }
 
     db.query(sql).then(r => {
@@ -210,10 +218,18 @@ app.post("/tobe1/gethname", (req, res) => {
 
 app.post("/tobe1/getparam", (req, res) => {
     const { hospcode, colname } = req.body;
-    const sql = `SELECT DISTINCT ${colname}, count(${colname})
+    let sql;
+    if (hospcode == '9999') {
+        sql = `SELECT DISTINCT ${colname}, count(${colname})
+        FROM tobe1 
+        WHERE date_part('year',age(now(), birth)) >= 7
+        GROUP BY ${colname}`
+    } else {
+        sql = `SELECT DISTINCT ${colname}, count(${colname})
         FROM tobe1 
         WHERE hospcode='${hospcode}' AND date_part('year',age(now(), birth)) >= 7
         GROUP BY ${colname}`
+    }
 
     db.query(sql).then(r => {
         res.status(200).json({
