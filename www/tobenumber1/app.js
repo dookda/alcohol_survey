@@ -1,4 +1,4 @@
-
+const url = "https://rti2dss.com/p4000"
 
 var root = am5.Root.new("chart1");
 root.setThemes([
@@ -123,7 +123,7 @@ chart2.appear(1000, 100);
 let hname = document.getElementById("hname");
 
 const getHname = () => {
-    axios.post('/tobe1/gethname/').then(r => {
+    axios.post(url + '/tobe1/gethname/').then(r => {
         r.data.data.map(i => {
             hname.innerHTML += `<option value="${i.hospcode}">${i.hosname}</option>`;
         })
@@ -131,7 +131,7 @@ const getHname = () => {
 }
 
 const getHcount = (hospcode) => {
-    axios.post('/tobe1/gethcount/', { hospcode }).then(r => {
+    axios.post(url + '/tobe1/gethcount/', { hospcode }).then(r => {
         let data = r.data.data.map(i => {
             return { name: i.hosname.replace("โรงพยาบาลส่งเสริมสุขภาพตำบล", "รพ.สต."), value: Number(i.count) }
         })
@@ -141,7 +141,7 @@ const getHcount = (hospcode) => {
 }
 
 const getParam = (hospcode, colname) => {
-    axios.post('/tobe1/getparam', { hospcode, colname }).then(r => {
+    axios.post(url + '/tobe1/getparam', { hospcode, colname }).then(r => {
         console.log(r.data.data);
         let data = r.data.data.map(i => {
             return { name: i.sex == 1 ? "ชาย" : "หญิง", value: Number(i.count) }
