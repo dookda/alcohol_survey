@@ -17,7 +17,7 @@ body {
 
 .chartTam {
     width: 100%;
-    height: 500px;
+    height: 640px;
 }
 
 .cntdiv {
@@ -27,7 +27,7 @@ body {
 
 .chartdiv {
     width: 100%;
-    height: 500px;
+    height: 640px;
 }
 
 .bg-white {
@@ -74,7 +74,7 @@ a {
 img {
     border-radius: 14px;
     padding: 5px;
-    width: 150px;
+    /* width: 150px; */
 }
 
 .mt-50 {

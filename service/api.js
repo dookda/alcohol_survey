@@ -238,4 +238,28 @@ app.post("/tobe1/getparam", (req, res) => {
     })
 })
 
+app.post("/tobe1/getbyage", (req, res) => {
+    const { group } = req.body;
+    let sql;
+    if (group == 1) {
+        sql = `SELECT distinct hosname, count(hosname) as count
+        FROM tobe1 
+        WHERE date_part('year',age(now(), birth)) >= 6
+			AND date_part('year',age(now(), birth)) <= 25
+        GROUP BY hosname`;
+    } else {
+        sql = `SELECT distinct hosname, count(hosname) as count
+        FROM tobe1 
+        WHERE date_part('year',age(now(), birth)) >= 25
+			AND date_part('year',age(now(), birth)) <= 65
+        GROUP BY hosname`
+    }
+
+    db.query(sql).then(r => {
+        res.status(200).json({
+            data: r.rows
+        })
+    })
+})
+
 module.exports = app;
