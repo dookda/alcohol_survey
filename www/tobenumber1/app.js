@@ -1,5 +1,5 @@
-// const url = "https://rti2dss.com/p4000"
-const url = "http://localhost:4000"
+const url = "https://rti2dss.com/p4000"
+// const url = "http://localhost:4000"
 
 const showChart = (div, data) => {
     var root = am5.Root.new(div);
